@@ -1,0 +1,388 @@
+/* Farbpalette und grundlegende Typografie */
+:root {
+    --primary-light-blue: #D6E6F2; /* Hellblau */
+    --secondary-beige: #F2E9DC; /* Beige */
+    --accent-rose: #F2D6E4; /* Rosé */
+    --accent-mint: #D6F2EB; /* Mintgrün */
+    --text-dark: #333; /* Dunkler Text */
+    --text-light: #fff; /* Heller Text */
+    --button-color: #8EB897; /* Ein beruhigender Grünton für Buttons */
+    --button-hover: #7AA380; /* Dunklerer Grünton für Hover-Effekt */
+}
+
+/* Globale Stile zurücksetzen und Box-Sizing setzen */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif; /* Hauptschriftart */
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--secondary-beige); /* Hintergrundfarbe des Bodys */
+    scroll-behavior: smooth; /* Sanftes Scrollen zu Ankerpunkten */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header-Bereich */
+header {
+    background-color: var(--primary-light-blue);
+    color: var(--text-dark);
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Leichter Schatten für den Header */
+}
+
+header .logo-slogan h1 {
+    font-family: 'Comfortaa', cursive; /* Spezielle Schriftart für den Firmennamen */
+    font-size: 2.8em;
+    margin-bottom: 5px;
+    color: var(--button-color); /* Firmenname in Akzentfarbe */
+}
+
+header .logo-slogan p {
+    font-size: 1.2em;
+    color: var(--text-dark);
+}
+
+/* Navigationsmenü */
+nav {
+    background-color: var(--accent-mint);
+    padding: 10px 0;
+    text-align: center;
+    position: sticky; /* Sticky Navigation */
+    top: 0;
+    z-index: 1000; /* Stellt sicher, dass die Navigation über anderen Elementen liegt */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Ermöglicht Umbruch auf kleineren Bildschirmen */
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: var(--text-light);
+    background-color: var(--button-color);
+}
+
+/* Hero-Bereich (Startseite) */
+.hero {
+    background-color: var(--accent-rose);
+    padding: 80px 20px;
+    text-align: center;
+    color: var(--text-dark);
+    position: relative;
+    overflow: hidden;
+    min-height: 500px; /* Mindesthöhe für den Hero-Bereich */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h2 {
+    font-family: 'Comfortaa', cursive;
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: var(--button-color);
+}
+
+.hero p {
+    font-size: 1.4em;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+}
+
+.hero-button {
+    display: inline-block;
+    background-color: var(--button-color);
+    color: var(--text-light);
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 50px; /* Abgerundeter Button */
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Leichter Schatten für den Button */
+}
+
+.hero-button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px); /* Leichter Hoch-Effekt beim Hover */
+}
+
+/* Platzhalter für Icons/Illustrationen (Unicode-Ersatz) */
+.hero .illustration {
+    margin-top: 40px;
+    font-size: 4em; /* Größe des Icons */
+    color: var(--button-color);
+    line-height: 1; /* Stellt sicher, dass das Icon nicht zu viel Platz einnimmt */
+}
+
+/* Leistungen-Bereich */
+.services {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: var(--secondary-beige);
+}
+
+.services h2 {
+    font-family: 'Comfortaa', cursive;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--button-color);
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsives Grid */
+    gap: 30px; /* Abstand zwischen den Service-Elementen */
+}
+
+.service-item {
+    background-color: var(--primary-light-blue);
+    padding: 30px;
+    border-radius: 15px; /* Abgerundete Ecken */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px); /* Leichter Hoch-Effekt beim Hover */
+}
+
+.service-item .icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: var(--button-color);
+    line-height: 1;
+}
+
+.service-item h3 {
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.service-item p {
+    font-size: 1.1em;
+    color: var(--text-dark);
+}
+
+/* Über Mich-Bereich */
+.about {
+    background-color: var(--accent-rose);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.about h2 {
+    font-family: 'Comfortaa', cursive;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--button-color);
+}
+
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 1.15em;
+    line-height: 1.8;
+    color: var(--text-dark);
+}
+
+.about-content p {
+    margin-bottom: 20px;
+}
+
+/* Kontakt-Bereich */
+.contact {
+    padding: 60px 20px;
+    background-color: var(--primary-light-blue);
+    text-align: center;
+}
+
+.contact h2 {
+    font-family: 'Comfortaa', cursive;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--button-color);
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--secondary-beige);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1em;
+    background-color: var(--text-light); /* Weiße Felder für bessere Lesbarkeit */
+    color: var(--text-dark);
+}
+
+.contact-form textarea {
+    resize: vertical; /* Ermöglicht vertikales Resizing */
+    min-height: 120px;
+}
+
+.contact-form button {
+    display: block;
+    width: 100%;
+    background-color: var(--button-color);
+    color: var(--text-light);
+    padding: 15px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.contact-form button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px);
+}
+
+/* Footer-Bereich */
+footer {
+    background-color: var(--accent-mint);
+    color: var(--text-dark);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.05); /* Leichter Schatten über dem Footer */
+}
+
+/* Responsive Design Anpassungen */
+@media (max-width: 768px) {
+    header .logo-slogan h1 {
+        font-size: 2.2em;
+    }
+
+    header .logo-slogan p {
+        font-size: 1em;
+    }
+
+    nav ul {
+        flex-direction: column; /* Navigationselemente untereinander auf kleinen Bildschirmen */
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    .hero h2 {
+        font-size: 2.2em;
+    }
+
+    .hero p {
+        font-size: 1.1em;
+    }
+
+    .services h2,
+    .about h2,
+    .contact h2 {
+        font-size: 2em;
+    }
+
+    .service-item {
+        padding: 20px;
+    }
+
+    .service-item h3 {
+        font-size: 1.5em;
+    }
+
+    .service-item p {
+        font-size: 1em;
+    }
+
+    .about-content {
+        font-size: 1em;
+    }
+
+    .contact-form {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .hero {
+        padding: 50px 15px;
+    }
+
+    .hero h2 {
+        font-size: 1.8em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    .hero-button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    .services, .about, .contact {
+        padding: 40px 15px;
+    }
+
+    .services h2,
+    .about h2,
+    .contact h2 {
+        font-size: 1.8em;
+    }
+}
