@@ -25,6 +25,8 @@
             width: 100%;
             max-width: 400px;
             box-sizing: border-box;
+            /* Key change: Initially hide the container */
+            display: none;
         }
         h1 {
             color: #79addc; /* A nice blue */
@@ -42,7 +44,7 @@
             font-weight: 600;
             color: #555;
         }
-        input[type="email"], /* Changed type to email */
+        input[type="email"],
         input[type="password"] {
             width: calc(100% - 20px);
             padding: 12px 10px;
@@ -62,7 +64,6 @@
             font-weight: 700;
             transition: background-color 0.3s ease;
             width: 100%;
-            /* No margin-bottom needed if it's the only button */
         }
         button:hover {
             background-color: #ff7f70;
@@ -96,7 +97,7 @@
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="login-container" id="loginContainer">
         <h1>muckiglück</h1>
         <p>Willkommen zurück!</p>
         <form id="authForm">
@@ -112,7 +113,7 @@
             <p class="success-message" id="successMessage"></p>
             <div class="loading-spinner" id="loadingSpinner"></div>
             <button type="submit" id="loginButton">Einloggen</button>
-            </form>
+        </form>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -133,6 +134,7 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
+        const loginContainer = document.getElementById('loginContainer'); // Get the main container
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const errorMessage = document.getElementById('errorMessage');
@@ -142,6 +144,8 @@
 
         // Flag to prevent multiple redirects or race conditions
         let isRedirecting = false;
+        // Store the unsubscribe function for auth.onAuthStateChanged
+        let unsubscribeAuthListener;
 
         function showMessage(element, message, isError = true) {
             if (isError) {
@@ -162,20 +166,24 @@
 
         function setLoading(isLoading) {
             loginButton.disabled = isLoading;
-            // No registerButton to disable anymore
             loadingSpinner.style.display = isLoading ? 'block' : 'none';
         }
 
         // IMPORTANT: Centralized authentication state observer
-        auth.onAuthStateChanged(user => {
+        // Assign the returned unsubscribe function to a variable
+        unsubscribeAuthListener = auth.onAuthStateChanged(user => {
             if (user) {
                 // User is signed in
-                if (!isRedirecting) { // Only redirect if not already in the process
+                if (!isRedirecting) {
                     isRedirecting = true; // Set flag to prevent re-entry
+                    // Unsubscribe to prevent this listener from firing again on this page
+                    unsubscribeAuthListener();
                     window.location.href = 'index.html';
                 }
+            } else {
+                // No user is signed in, show the login form
+                loginContainer.style.display = 'flex'; // Make the container visible
             }
-            // If no user, stay on login page. No need for an else here.
         });
 
         // Handle Login (Submit Form)
@@ -185,11 +193,12 @@
             setLoading(true);
 
             const email = emailInput.value;
-            const password = passwordInput.value;
+            const password = passwordInput.getElementById('password');
 
             try {
                 await auth.signInWithEmailAndPassword(email, password);
-                // Redirection handled by onAuthStateChanged
+                // On successful login, auth.onAuthStateChanged will trigger and redirect.
+                // The setLoading(false) is not needed here because the page will redirect.
             } catch (error) {
                 console.error("Login Error:", error.code, error.message);
                 let displayMessage = 'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.';
@@ -204,8 +213,6 @@
                 setLoading(false); // Re-enable button only if login fails
             }
         });
-
-        // REGISTRATION LOGIC REMOVED since button is gone
     </script>
 </body>
 </html>
