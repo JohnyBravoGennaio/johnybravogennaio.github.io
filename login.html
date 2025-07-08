@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
-    <div class="login-container" id="loginContainer">
+    <div class="login-container" id="loginContainer" style="display: none;">
         <h1>muckiglück</h1>
         <p>Willkommen zurück!</p>
         <form id="authForm">
@@ -31,7 +31,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
 
     <script>
-        // Your Firebase configuration (REPLACE WITH YOUR ACTUAL CONFIG)
+        // Your Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAlDyv4LGkYFzDWwVwVTpfyxEmpROz115o",
             authDomain: "muckiglueckauth.firebaseapp.com",
@@ -46,6 +46,7 @@
         const auth = firebase.auth();
 
         const loginContainer = document.getElementById('loginContainer');
+        const authForm = document.getElementById('authForm');
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const errorMessage = document.getElementById('errorMessage');
@@ -54,16 +55,9 @@
         const loadingSpinner = document.getElementById('loadingSpinner');
 
         let isRedirecting = false;
-        let unsubscribeAuthListener;
 
         function showMessage(element, message, isError = true) {
-            if (isError) {
-                element.classList.remove('success-message');
-                element.classList.add('error-message');
-            } else {
-                element.classList.remove('error-message');
-                element.classList.add('success-message');
-            }
+            element.className = isError ? 'error-message' : 'success-message';
             element.textContent = message;
             element.style.display = 'block';
         }
@@ -78,19 +72,29 @@
             loadingSpinner.style.display = isLoading ? 'block' : 'none';
         }
 
-        unsubscribeAuthListener = auth.onAuthStateChanged(user => {
+        auth.onAuthStateChanged(user => {
             if (user) {
-                if (!isRedirecting) {
-                    isRedirecting = true;
-                    unsubscribeAuthListener();
+                // Prevent multiple redirects if the listener fires again
+                if (isRedirecting) return;
+                isRedirecting = true;
+                
+                // Show a success message before redirecting
+                hideMessages();
+                authForm.style.display = 'none'; // Hide form fields
+                showMessage(successMessage, 'Anmeldung erfolgreich! Du wirst weitergeleitet...', false);
+                
+                setTimeout(() => {
                     window.location.href = 'index.html';
-                }
+                }, 1500); // Wait 1.5 seconds before redirect
+                
             } else {
-                loginContainer.style.display = 'flex'; // Show the container when not authenticated
+                // If not logged in, ensure the login form is visible.
+                setLoading(false);
+                loginContainer.style.display = 'flex'; 
             }
         });
 
-        document.getElementById('authForm').addEventListener('submit', async function(event) {
+        authForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             hideMessages();
             setLoading(true);
@@ -100,10 +104,11 @@
 
             try {
                 await auth.signInWithEmailAndPassword(email, password);
+                // The onAuthStateChanged listener will handle the success case
             } catch (error) {
                 console.error("Login Error:", error.code, error.message);
                 let displayMessage = 'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.';
-                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
                     displayMessage = 'Ungültige Anmeldedaten.';
                 } else if (error.code === 'auth/invalid-email') {
                     displayMessage = 'Ungültiges E-Mail-Format.';
@@ -113,7 +118,7 @@
                     displayMessage = 'Netzwerkfehler. Überprüfen Sie Ihre Internetverbindung.';
                 }
                 showMessage(errorMessage, displayMessage, true);
-                setLoading(false);
+                setLoading(false); // Stop loading only on error
             }
         });
     </script>
