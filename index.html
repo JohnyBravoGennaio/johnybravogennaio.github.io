@@ -92,7 +92,7 @@
         <h2>Über muckiglück</h2>
         <div class="about-content">
             <p>Hallo, ich bin [Dein Name], die Gründerin von muckiglück. Als erfahrene Familienbegleiterin und zertifizierte Beraterin in den Bereichen Stillen, Schlaf und Ernährung ist es meine Leidenschaft, Familien in dieser besonderen Lebensphase zu unterstützen.</p>
-            <p>Ich weiß aus eigener Erfahrung, wie viele Fragen und Unsicherheiten aufkommen können, wenn ein Baby das Licht der Welt erblickt oder die Familie wächst. Mein Ziel ist es, euch einen sicheren Raum zu bieten, in dem ihr euch verstanden und gestärkt fühlt. Ich arbeite ganzheitlich, individuell und immer mit viel Herz.</p>
+            <p>Ich weiß aus eigener Erfahrung, wie viele Fragen und Unsicherheiten aufkommen können, wenn ein Baby das Licht der Welt erblickt oder die Familie wächst. Mein Ziel ist es, euch einen sicheren Raum zu bieten, in dem ihr euch verstanden und gestärkt fühlt. Ich arbebeite ganzheitlich, individuell und immer mit viel Herz.</p>
             <p>Lasst uns gemeinsam euren Familienalltag leichter und glücklicher gestalten!</p>
         </div>
     </div>
@@ -153,13 +153,18 @@
             if (user) {
                 welcomeMessage.textContent = `Willkommen, ${user.email}!`;
             } else {
-                window.location.href = 'login.html';
+                // Only redirect if not already on the login page to prevent infinite redirects
+                if (window.location.pathname !== '/login.html' && window.location.pathname !== '/login') {
+                     window.location.href = 'login.html';
+                }
             }
         });
 
         logoutButton.addEventListener('click', async () => {
             try {
                 await auth.signOut();
+                // Redirect to login page after successful logout
+                window.location.href = 'login.html';
             } catch (error) {
                 console.error("Logout Error:", error);
                 alert("Fehler beim Abmelden. Bitte versuchen Sie es erneut.");
@@ -174,10 +179,13 @@
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault(); // Stop the form from reloading the page
             
+            // Clear previous status messages
+            formStatus.textContent = '';
+            formStatus.className = 'form-status'; // Reset class
+
             // Show loading state
             submitButton.disabled = true;
             submitButton.textContent = 'Wird gesendet...';
-            formStatus.textContent = '';
             
             const formData = {
                 name: contactForm.name.value,
@@ -186,9 +194,29 @@
             };
 
             try {
-                // **IMPORTANT**: Replace with your actual Cloud Function URL after deployment
+                // **IMPORTANT**: Replace 'YOUR_CLOUD_FUNCTION_URL' with your actual deployed Google Cloud Function URL.
+                // This function should be set up to receive the form data and send an email (e.g., using Nodemailer).
                 const functionUrl = 'YOUR_CLOUD_FUNCTION_URL'; 
                 
+                // --- MOCK API CALL FOR DEMONSTRATION IF NO CLOUD FUNCTION IS DEPLOYED ---
+                // If you don't have a Cloud Function yet, you can uncomment this block
+                // to simulate a successful submission for testing the front-end.
+                /*
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
+                const success = true; // Set to false to test error case
+                if (success) {
+                    formStatus.textContent = 'Vielen Dank! Ihre Nachricht wurde gesendet. (Simuliert)';
+                    formStatus.className = 'form-status success';
+                    contactForm.reset();
+                } else {
+                    throw new Error('Simulierter Fehler beim Senden der Nachricht.');
+                }
+                */
+                // --- END MOCK API CALL ---
+
+
+                // --- ACTUAL FETCH CALL FOR DEPLOYED CLOUD FUNCTION ---
+                // Keep this commented out or replace the mock call if you are actively developing the backend.
                 const response = await fetch(functionUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -200,12 +228,13 @@
                     formStatus.className = 'form-status success';
                     contactForm.reset();
                 } else {
-                    throw new Error('Fehler beim Senden der Nachricht.');
+                    const errorData = await response.json(); // Try to get more detailed error from backend
+                    throw new Error(errorData.message || 'Fehler beim Senden der Nachricht.');
                 }
 
             } catch (error) {
                 console.error('Form Submission Error:', error);
-                formStatus.textContent = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
+                formStatus.textContent = `Ein Fehler ist aufgetreten: ${error.message || 'Bitte versuchen Sie es später erneut.'}`;
                 formStatus.className = 'form-status error';
             } finally {
                 // Restore button
