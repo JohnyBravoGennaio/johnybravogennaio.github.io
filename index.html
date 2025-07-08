@@ -1,124 +1,188 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>muckiglück – Geborgen wachsen, begleitet mit Herz</title>
-    <!-- Google Fonts für moderne und gut lesbare Schriftarten -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
-    <!-- Verknüpfung zur externen CSS-Datei -->
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>muckiglück – Geborgen wachsen, begleitet mit Herz</title>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+    <style>
+        /* Basic styling for the welcome message and logout button if not already in style.css */
+        .welcome-message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .logout-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logout-button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .logout-button:hover {
+            background-color: #c0392b;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header-Bereich mit Logo und Slogan -->
-    <header>
-        <div class="container">
-            <div class="logo-slogan">
-                <h1>muckiglück</h1>
-                <p>Geborgen wachsen – begleitet mit Herz</p>
-            </div>
-        </div>
-    </header>
+        <header>
+        <div class="container">
+            <div class="logo-slogan">
+                <h1>muckiglück</h1>
+                <p>Geborgen wachsen – begleitet mit Herz</p>
+            </div>
+        </div>
+    </header>
 
-    <!-- Navigationsmenü -->
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="#start" class="active">Start</a></li>
-                <li><a href="#leistungen">Leistungen</a></li>
-                <li><a href="#ueber-mich">Über mich</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="welcome-message" id="welcomeMessage"></div>
+    <div class="logout-container">
+        <button id="logoutButton" class="logout-button">Abmelden</button>
+    </div>
 
-    <!-- Hero-Bereich (Startseite) -->
-    <section id="start" class="hero">
-        <div class="container">
-            <h2>Liebevolle Begleitung für eure Familienreise</h2>
-            <p>Von der Schwangerschaft bis ins Kleinkindalter – muckiglück ist an eurer Seite. Wir bieten einfühlsame Beratung und Unterstützung für alle Fragen rund um Familie, Baby und Elternschaft.</p>
-            <a href="#kontakt" class="hero-button">Jetzt Kontakt aufnehmen</a>
-            <!-- Icons/Illustrationen als Unicode-Emojis oder einfache Symbole -->
-            <div class="illustration">
-                👶🏽 👨‍👩‍👧‍👦 ❤️
-            </div>
-        </div>
-    </section>
+        <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#start" class="active">Start</a></li>
+                <li><a href="#leistungen">Leistungen</a></li>
+                <li><a href="#ueber-mich">Über mich</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <!-- Leistungen-Bereich -->
-    <section id="leistungen" class="services">
-        <div class="container">
-            <h2>Unsere Leistungen für euch</h2>
-            <div class="service-grid">
-                <div class="service-item">
-                    <div class="icon">👨‍👩‍👧‍👦</div>
-                    <h3>Familienbegleitung</h3>
-                    <p>Umfassende Unterstützung für Familien in allen Phasen, um Herausforderungen gemeinsam zu meistern und Freude zu stärken.</p>
-                </div>
-                <div class="service-item">
-                    <div class="icon">🍼</div>
-                    <h3>Stillberatung</h3>
-                    <p>Professionelle Hilfe und Tipps rund ums Stillen, für einen entspannten Start und eine gute Bindung.</p>
-                </div>
-                <div class="service-item">
-                    <div class="icon">😴</div>
-                    <h3>Schlafberatung</h3>
-                    <p>Sanfte Wege zu mehr Schlaf für Babys, Kleinkinder und die ganze Familie – ohne Tränen und Druck.</p>
-                </div>
-                <div class="service-item">
-                    <div class="icon">🍎</div>
-                    <h3>Beikost-Beratung</h3>
-                    <p>Sicherer und genussvoller Start in die Welt der festen Nahrung für euer Baby.</p>
-                </div>
-                <div class="service-item">
-                    <div class="icon">🥕</div>
-                    <h3>Ernährungsberatung</h3>
-                    <p>Individuelle Beratung zur Ernährung von Babys, Kleinkindern, werdenden und frischgebackenen Eltern.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <section id="start" class="hero">
+        <div class="container">
+            <h2>Liebevolle Begleitung für eure Familienreise</h2>
+            <p>Von der Schwangerschaft bis ins Kleinkindalter – muckiglück ist an eurer Seite. Wir bieten einfühlsame Beratung und Unterstützung für alle Fragen rund um Familie, Baby und Elternschaft.</p>
+            <a href="#kontakt" class="hero-button">Jetzt Kontakt aufnehmen</a>
+                        <div class="illustration">
+                👶🏽 👨‍👩‍👧‍👦 ❤️
+            </div>
+        </div>
+    </section>
 
-    <!-- Über Mich-Bereich -->
-    <section id="ueber-mich" class="about">
-        <div class="container">
-            <h2>Über muckiglück</h2>
-            <div class="about-content">
-                <p>Hallo, ich bin [Dein Name], die Gründerin von muckiglück. Als erfahrene Familienbegleiterin und zertifizierte Beraterin in den Bereichen Stillen, Schlaf und Ernährung ist es meine Leidenschaft, Familien in dieser besonderen Lebensphase zu unterstützen.</p>
-                <p>Ich weiß aus eigener Erfahrung, wie viele Fragen und Unsicherheiten aufkommen können, wenn ein Baby das Licht der Welt erblickt oder die Familie wächst. Mein Ziel ist es, euch einen sicheren Raum zu bieten, in dem ihr euch verstanden und gestärkt fühlt. Ich arbeite ganzheitlich, individuell und immer mit viel Herz.</p>
-                <p>Lasst uns gemeinsam euren Familienalltag leichter und glücklicher gestalten!</p>
-            </div>
-        </div>
-    </section>
+        <section id="leistungen" class="services">
+        <div class="container">
+            <h2>Unsere Leistungen für euch</h2>
+            <div class="service-grid">
+                <div class="service-item">
+                    <div class="icon">👨‍👩‍👧‍👦</div>
+                    <h3>Familienbegleitung</h3>
+                    <p>Umfassende Unterstützung für Familien in allen Phasen, um Herausforderungen gemeinsam zu meistern und Freude zu stärken.</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon">🍼</div>
+                    <h3>Stillberatung</h3>
+                    <p>Professionelle Hilfe und Tipps rund ums Stillen, für einen entspannten Start und eine gute Bindung.</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon">😴</div>
+                    <h3>Schlafberatung</h3>
+                    <p>Sanfte Wege zu mehr Schlaf für Babys, Kleinkinder und die ganze Familie – ohne Tränen und Druck.</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon">🍎</div>
+                    <h3>Beikost-Beratung</h3>
+                    <p>Sicherer und genussvoller Start in die Welt der festen Nahrung für euer Baby.</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon">🥕</div>
+                    <h3>Ernährungsberatung</h3>
+                    <p>Individuelle Beratung zur Ernährung von Babys, Kleinkindern, werdenden und frischgebackenen Eltern.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Kontakt-Bereich -->
-    <section id="kontakt" class="contact">
-        <div class="container">
-            <h2>Kontaktiert uns</h2>
-            <p>Habt ihr Fragen oder möchtet eine Beratung anfragen? Schreibt uns gerne eine Nachricht!</p>
-            <div class="contact-form">
-                <form action="#" method="POST"> <!-- 'action' kann später eine Backend-URL sein -->
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
+        <section id="ueber-mich" class="about">
+        <div class="container">
+            <h2>Über muckiglück</h2>
+            <div class="about-content">
+                <p>Hallo, ich bin [Dein Name], die Gründerin von muckiglück. Als erfahrene Familienbegleiterin und zertifizierte Beraterin in den Bereichen Stillen, Schlaf und Ernährung ist es meine Leidenschaft, Familien in dieser besonderen Lebensphase zu unterstützen.</p>
+                <p>Ich weiß aus eigener Erfahrung, wie viele Fragen und Unsicherheiten aufkommen können, wenn ein Baby das Licht der Welt erblickt oder die Familie wächst. Mein Ziel ist es, euch einen sicheren Raum zu bieten, in dem ihr euch verstanden und gestärkt fühlt. Ich arbeite ganzheitlich, individuell und immer mit viel Herz.</p>
+                <p>Lasst uns gemeinsam euren Familienalltag leichter und glücklicher gestalten!</p>
+            </div>
+        </div>
+    </section>
 
-                    <label for="email">E-Mail:</label>
-                    <input type="email" id="email" name="email" required>
+        <section id="kontakt" class="contact">
+        <div class="container">
+            <h2>Kontaktiert uns</h2>
+            <p>Habt ihr Fragen oder möchtet eine Beratung anfragen? Schreibt uns gerne eine Nachricht!</p>
+            <div class="contact-form">
+                <form action="#" method="POST">                     <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
 
-                    <label for="message">Nachricht:</label>
-                    <textarea id="message" name="message" rows="6" required></textarea>
+                    <label for="email">E-Mail:</label>
+                    <input type="email" id="email" name="email" required>
 
-                    <button type="submit">Nachricht senden</button>
-                </form>
-            </div>
-        </div>
-    </section>
+                    <label for="message">Nachricht:</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
 
-    <!-- Footer-Bereich -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 muckiglück. Alle Rechte vorbehalten.</p>
-            <p>Eure Begleitung für ein geborgenes Wachstum.</p>
-        </div>
-    </footer>
+                    <button type="submit">Nachricht senden</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+        <footer>
+        <div class="container">
+            <p>&copy; 2025 muckiglück. Alle Rechte vorbehalten.</p>
+            <p>Eure Begleitung für ein geborgenes Wachstum.</p>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+
+    <script>
+        // Your Firebase configuration (REPLACE WITH YOUR ACTUAL CONFIG)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const logoutButton = document.getElementById('logoutButton');
+
+        // Check authentication status on page load
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in
+                welcomeMessage.textContent = `Willkommen, ${user.email}!`;
+            } else {
+                // No user is signed in, redirect to login page
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Handle Logout
+        logoutButton.addEventListener('click', async () => {
+            try {
+                await auth.signOut();
+                // Redirect will happen via onAuthStateChanged listener
+            } catch (error) {
+                console.error("Logout Error:", error);
+                alert("Fehler beim Abmelden. Bitte versuchen Sie es erneut.");
+            }
+        });
+    </script>
 </body>
 </html>
