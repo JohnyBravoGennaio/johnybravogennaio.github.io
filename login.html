@@ -27,10 +27,10 @@
         </form>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
-    <script>
         // Your Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAlDyv4LGkYFzDWwVwVTpfyxEmpROz115o",
@@ -42,8 +42,8 @@
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
 
         const loginContainer = document.getElementById('loginContainer');
         const authForm = document.getElementById('authForm');
@@ -71,26 +71,22 @@
             loginButton.disabled = isLoading;
             loadingSpinner.style.display = isLoading ? 'block' : 'none';
         }
-
-        auth.onAuthStateChanged(user => {
+        
+        onAuthStateChanged(auth, user => {
             if (user) {
-                // Prevent multiple redirects if the listener fires again
                 if (isRedirecting) return;
                 isRedirecting = true;
                 
-                // Show a success message before redirecting
                 hideMessages();
-                authForm.style.display = 'none'; // Hide form fields
+                authForm.style.display = 'none';
                 showMessage(successMessage, 'Anmeldung erfolgreich! Du wirst weitergeleitet...', false);
                 
                 setTimeout(() => {
                     window.location.href = 'index.html';
-                }, 1500); // Wait 1.5 seconds before redirect
-                
+                }, 1500);
             } else {
-                // If not logged in, ensure the login form is visible.
                 setLoading(false);
-                loginContainer.style.display = 'flex'; 
+                loginContainer.style.display = 'flex';
             }
         });
 
@@ -103,8 +99,8 @@
             const password = passwordInput.value;
 
             try {
-                await auth.signInWithEmailAndPassword(email, password);
-                // The onAuthStateChanged listener will handle the success case
+                await signInWithEmailAndPassword(auth, email, password);
+                // onAuthStateChanged handles success
             } catch (error) {
                 console.error("Login Error:", error.code, error.message);
                 let displayMessage = 'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.';
@@ -118,7 +114,7 @@
                     displayMessage = 'Netzwerkfehler. Überprüfen Sie Ihre Internetverbindung.';
                 }
                 showMessage(errorMessage, displayMessage, true);
-                setLoading(false); // Stop loading only on error
+                setLoading(false);
             }
         });
     </script>
