@@ -11,20 +11,127 @@
 }
 
 /* Globale Stile zurücksetzen und Box-Sizing setzen */
-* {
-    box-sizing: border-box;
+/* BASIC RESET for better cross-browser consistency */
+*, *::before, *::after {
+    box-sizing: border-box; /* Crucial for consistent sizing */
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: 'Quicksand', sans-serif; /* Hauptschriftart */
-    line-height: 1.6;
-    color: var(--text-dark);
-    background-color: var(--secondary-beige); /* Hintergrundfarbe des Bodys */
-    scroll-behavior: smooth; /* Sanftes Scrollen zu Ankerpunkten */
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f8f0e5; /* Softer background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensures it takes full viewport height */
+    margin: 0;
+    color: #4a4a4a;
+    /* Optional: prevent text selection if not desired, especially on mobile */
+    -webkit-text-size-adjust: 100%; /* Prevents iOS from auto-resizing fonts */
 }
 
+.login-container {
+    background-color: #ffffff;
+    padding: 30px; /* Slightly reduced padding for smaller screens */
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%; /* Use a percentage for width, allowing more space on very small screens */
+    max-width: 400px;
+    /* display: none; will be handled by JS as before */
+}
+h1 {
+    color: #79addc; /* A nice blue */
+    margin-bottom: 25px; /* Slightly adjusted margin */
+    font-family: 'Comfortaa', cursive;
+    font-size: 2.2em; /* Slightly adjusted for better mobile fit */
+}
+p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+.form-group {
+    margin-bottom: 18px; /* Slightly adjusted margin */
+    text-align: left;
+}
+label {
+    display: block;
+    margin-bottom: 7px; /* Slightly adjusted margin */
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95em; /* Make labels slightly smaller */
+}
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Make inputs take full width of their container */
+    padding: 12px 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em; /* Keep font size consistent */
+    /* Ensure mobile browsers don't mess with appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+button {
+    background-color: #ff9a8d;
+    color: white;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+button:hover {
+    background-color: #ff7f70;
+}
+.error-message {
+    color: #e74c3c;
+    margin-top: 15px;
+    font-size: 0.9em;
+    display: none;
+}
+.success-message {
+    color: #27ae60;
+    margin-top: 15px;
+    font-size: 0.9em;
+    display: none;
+}
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #79addc;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: none;
+    margin: 10px auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Adjustments for very small screens (e.g., iPhone 5/SE) */
+@media (max-width: 375px) {
+    .login-container {
+        padding: 25px 20px; /* More padding on very small screens */
+    }
+    h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+    p {
+        font-size: 1em;
+    }
+    label, input, button {
+        font-size: 0.95em; /* Slightly smaller for compactness */
+    }
+}
 .container {
     max-width: 1200px;
     margin: 0 auto;
