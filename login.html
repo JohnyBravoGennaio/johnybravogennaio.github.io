@@ -62,7 +62,7 @@
             font-weight: 700;
             transition: background-color 0.3s ease;
             width: 100%;
-            margin-bottom: 10px; /* Space between buttons */
+            /* No margin-bottom needed if it's the only button */
         }
         button:hover {
             background-color: #ff7f70;
@@ -112,8 +112,7 @@
             <p class="success-message" id="successMessage"></p>
             <div class="loading-spinner" id="loadingSpinner"></div>
             <button type="submit" id="loginButton">Einloggen</button>
-            <button type="button" id="registerButton">Registrieren</button>
-        </form>
+            </form>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -122,12 +121,12 @@
     <script>
         // Your Firebase configuration (REPLACE WITH YOUR ACTUAL CONFIG)
         const firebaseConfig = {
-            apiKey: "AIzaSyAlDyv4LGkYFzDWwVwVTpfyxEmpROz115o",
-            authDomain: "muckiglueckauth.firebaseapp.com",
-            projectId: "muckiglueckauth",
-            storageBucket: "muckiglueckauth.firebasestorage.app",
-            messagingSenderId: "550834074850",
-            appId: "1:550834074850:web:e83a073d702b1fd9e09abb"
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
 
         // Initialize Firebase
@@ -139,8 +138,10 @@
         const errorMessage = document.getElementById('errorMessage');
         const successMessage = document.getElementById('successMessage');
         const loginButton = document.getElementById('loginButton');
-        const registerButton = document.getElementById('registerButton');
         const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Flag to prevent multiple redirects or race conditions
+        let isRedirecting = false;
 
         function showMessage(element, message, isError = true) {
             if (isError) {
@@ -161,20 +162,23 @@
 
         function setLoading(isLoading) {
             loginButton.disabled = isLoading;
-            registerButton.disabled = isLoading;
+            // No registerButton to disable anymore
             loadingSpinner.style.display = isLoading ? 'block' : 'none';
         }
 
-        // Check if user is already logged in
+        // IMPORTANT: Centralized authentication state observer
         auth.onAuthStateChanged(user => {
             if (user) {
-                // User is signed in, redirect to main page
-                window.location.href = 'index.html';
+                // User is signed in
+                if (!isRedirecting) { // Only redirect if not already in the process
+                    isRedirecting = true; // Set flag to prevent re-entry
+                    window.location.href = 'index.html';
+                }
             }
-            // If no user, stay on login page
+            // If no user, stay on login page. No need for an else here.
         });
 
-        // Handle Login
+        // Handle Login (Submit Form)
         document.getElementById('authForm').addEventListener('submit', async function(event) {
             event.preventDefault();
             hideMessages();
@@ -185,7 +189,7 @@
 
             try {
                 await auth.signInWithEmailAndPassword(email, password);
-                // Redirect will happen via onAuthStateChanged listener
+                // Redirection handled by onAuthStateChanged
             } catch (error) {
                 console.error("Login Error:", error.code, error.message);
                 let displayMessage = 'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.';
@@ -197,45 +201,11 @@
                     displayMessage = 'Zu viele fehlgeschlagene Anmeldeversuche. Bitte versuchen Sie es später erneut.';
                 }
                 showMessage(errorMessage, displayMessage, true);
-            } finally {
-                setLoading(false);
+                setLoading(false); // Re-enable button only if login fails
             }
         });
 
-        // Handle Registration
-        registerButton.addEventListener('click', async function() {
-            hideMessages();
-            setLoading(true);
-
-            const email = emailInput.value;
-            const password = passwordInput.value;
-
-            // Basic client-side validation
-            if (password.length < 6) {
-                showMessage(errorMessage, 'Das Passwort muss mindestens 6 Zeichen lang sein.', true);
-                setLoading(false);
-                return;
-            }
-
-            try {
-                await auth.createUserWithEmailAndPassword(email, password);
-                showMessage(successMessage, 'Registrierung erfolgreich! Sie sind jetzt eingeloggt.', false);
-                // User is automatically signed in after registration, so onAuthStateChanged will handle redirection
-            } catch (error) {
-                console.error("Registration Error:", error.code, error.message);
-                let displayMessage = 'Registrierung fehlgeschlagen.';
-                if (error.code === 'auth/email-already-in-use') {
-                    displayMessage = 'Diese E-Mail-Adresse wird bereits verwendet.';
-                } else if (error.code === 'auth/invalid-email') {
-                    displayMessage = 'Ungültiges E-Mail-Format.';
-                } else if (error.code === 'auth/weak-password') {
-                    displayMessage = 'Das Passwort ist zu schwach. Bitte wählen Sie ein stärkeres Passwort (mindestens 6 Zeichen).';
-                }
-                showMessage(errorMessage, displayMessage, true);
-            } finally {
-                setLoading(false);
-            }
-        });
+        // REGISTRATION LOGIC REMOVED since button is gone
     </script>
 </body>
 </html>
