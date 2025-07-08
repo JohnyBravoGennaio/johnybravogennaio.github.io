@@ -193,7 +193,7 @@
             setLoading(true);
 
             const email = emailInput.value;
-            const password = passwordInput.getElementById('password');
+            const password = passwordInput.value;
 
             try {
                 await auth.signInWithEmailAndPassword(email, password);
