@@ -6,55 +6,70 @@
     <title>muckiglück – Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <style>
+        /* BASIC RESET for better cross-browser consistency */
+        *, *::before, *::after {
+            box-sizing: border-box; /* Crucial for consistent sizing */
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Quicksand', sans-serif;
             background-color: #f8f0e5; /* Softer background */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            min-height: 100vh; /* Ensures it takes full viewport height */
             margin: 0;
             color: #4a4a4a;
+            /* Optional: prevent text selection if not desired, especially on mobile */
+            -webkit-text-size-adjust: 100%; /* Prevents iOS from auto-resizing fonts */
         }
         .login-container {
             background-color: #ffffff;
-            padding: 40px;
+            padding: 30px; /* Slightly reduced padding for smaller screens */
             border-radius: 12px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 100%;
+            width: 90%; /* Use a percentage for width, allowing more space on very small screens */
             max-width: 400px;
-            box-sizing: border-box;
-            /* Key change: Initially hide the container */
-            display: none;
+            /* display: none; will be handled by JS as before */
         }
         h1 {
             color: #79addc; /* A nice blue */
-            margin-bottom: 30px;
+            margin-bottom: 25px; /* Slightly adjusted margin */
             font-family: 'Comfortaa', cursive;
-            font-size: 2.5em;
+            font-size: 2.2em; /* Slightly adjusted for better mobile fit */
+        }
+        p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
         }
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px; /* Slightly adjusted margin */
             text-align: left;
         }
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 7px; /* Slightly adjusted margin */
             font-weight: 600;
             color: #555;
+            font-size: 0.95em; /* Make labels slightly smaller */
         }
         input[type="email"],
         input[type="password"] {
-            width: calc(100% - 20px);
+            width: 100%; /* Make inputs take full width of their container */
             padding: 12px 10px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            font-size: 1em;
-            box-sizing: border-box;
+            font-size: 1em; /* Keep font size consistent */
+            /* Ensure mobile browsers don't mess with appearance */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
         button {
-            background-color: #ff9a8d; /* A warm coral/orange */
+            background-color: #ff9a8d;
             color: white;
             padding: 14px 25px;
             border: none;
@@ -72,13 +87,13 @@
             color: #e74c3c;
             margin-top: 15px;
             font-size: 0.9em;
-            display: none; /* Hidden by default */
+            display: none;
         }
         .success-message {
             color: #27ae60;
             margin-top: 15px;
             font-size: 0.9em;
-            display: none; /* Hidden by default */
+            display: none;
         }
         .loading-spinner {
             border: 4px solid #f3f3f3;
@@ -87,12 +102,29 @@
             width: 20px;
             height: 20px;
             animation: spin 1s linear infinite;
-            display: none; /* Hidden by default */
+            display: none;
             margin: 10px auto;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        /* Adjustments for very small screens (e.g., iPhone 5/SE) */
+        @media (max-width: 375px) {
+            .login-container {
+                padding: 25px 20px; /* More padding on very small screens */
+            }
+            h1 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+            p {
+                font-size: 1em;
+            }
+            label, input, button {
+                font-size: 0.95em; /* Slightly smaller for compactness */
+            }
         }
     </style>
 </head>
@@ -134,7 +166,7 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
-        const loginContainer = document.getElementById('loginContainer'); // Get the main container
+        const loginContainer = document.getElementById('loginContainer');
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const errorMessage = document.getElementById('errorMessage');
@@ -142,9 +174,7 @@
         const loginButton = document.getElementById('loginButton');
         const loadingSpinner = document.getElementById('loadingSpinner');
 
-        // Flag to prevent multiple redirects or race conditions
         let isRedirecting = false;
-        // Store the unsubscribe function for auth.onAuthStateChanged
         let unsubscribeAuthListener;
 
         function showMessage(element, message, isError = true) {
@@ -169,24 +199,18 @@
             loadingSpinner.style.display = isLoading ? 'block' : 'none';
         }
 
-        // IMPORTANT: Centralized authentication state observer
-        // Assign the returned unsubscribe function to a variable
         unsubscribeAuthListener = auth.onAuthStateChanged(user => {
             if (user) {
-                // User is signed in
                 if (!isRedirecting) {
-                    isRedirecting = true; // Set flag to prevent re-entry
-                    // Unsubscribe to prevent this listener from firing again on this page
+                    isRedirecting = true;
                     unsubscribeAuthListener();
                     window.location.href = 'index.html';
                 }
             } else {
-                // No user is signed in, show the login form
-                loginContainer.style.display = 'flex'; // Make the container visible
+                loginContainer.style.display = 'flex'; // Show the container when not authenticated
             }
         });
 
-        // Handle Login (Submit Form)
         document.getElementById('authForm').addEventListener('submit', async function(event) {
             event.preventDefault();
             hideMessages();
@@ -197,8 +221,6 @@
 
             try {
                 await auth.signInWithEmailAndPassword(email, password);
-                // On successful login, auth.onAuthStateChanged will trigger and redirect.
-                // The setLoading(false) is not needed here because the page will redirect.
             } catch (error) {
                 console.error("Login Error:", error.code, error.message);
                 let displayMessage = 'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.';
@@ -208,9 +230,11 @@
                     displayMessage = 'Ungültiges E-Mail-Format.';
                 } else if (error.code === 'auth/too-many-requests') {
                     displayMessage = 'Zu viele fehlgeschlagene Anmeldeversuche. Bitte versuchen Sie es später erneut.';
+                } else if (error.code === 'auth/network-request-failed') {
+                    displayMessage = 'Netzwerkfehler. Überprüfen Sie Ihre Internetverbindung.';
                 }
                 showMessage(errorMessage, displayMessage, true);
-                setLoading(false); // Re-enable button only if login fails
+                setLoading(false);
             }
         });
     </script>
