@@ -1,495 +1,486 @@
-/* Farbpalette und grundlegende Typografie */
+/* --- Allgemeine Stile & Schriftarten --- */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
 :root {
-    --primary-light-blue: #D6E6F2; /* Hellblau */
-    --secondary-beige: #F2E9DC; /* Beige */
-    --accent-rose: #F2D6E4; /* Rosé */
-    --accent-mint: #D6F2EB; /* Mintgrün */
-    --text-dark: #333; /* Dunkler Text */
-    --text-light: #fff; /* Heller Text */
-    --button-color: #8EB897; /* Ein beruhigender Grünton für Buttons */
-    --button-hover: #7AA380; /* Dunklerer Grünton für Hover-Effekt */
+    --bg-color: #FBF8F3; /* Sanftes Creme */
+    --primary-color: #8A9A5B; /* Sanftes Olivgrün */
+    --accent-color-light: #E6DCD2; /* Helles Beige */
+    --accent-color-dark: #BDB0A4; /* Dunkleres Beige */
+    --text-color: #333333;
+    --white-color: #FFFFFF;
+    --font-family: 'Lato', sans-serif;
 }
 
-/* Globale Stile zurücksetzen und Box-Sizing setzen */
-/* BASIC RESET for better cross-browser consistency */
-*, *::before, *::after {
-    box-sizing: border-box; /* Crucial for consistent sizing */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Quicksand', sans-serif;
-    background-color: #f8f0e5; /* Softer background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Ensures it takes full viewport height */
-    margin: 0;
-    color: #4a4a4a;
-    /* Optional: prevent text selection if not desired, especially on mobile */
-    -webkit-text-size-adjust: 100%; /* Prevents iOS from auto-resizing fonts */
-}
-
-.login-container {
-    background-color: #ffffff;
-    padding: 30px; /* Slightly reduced padding for smaller screens */
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 90%; /* Use a percentage for width, allowing more space on very small screens */
-    max-width: 400px;
-    /* display: none; will be handled by JS as before */
-}
-h1 {
-    color: #79addc; /* A nice blue */
-    margin-bottom: 25px; /* Slightly adjusted margin */
-    font-family: 'Comfortaa', cursive;
-    font-size: 2.2em; /* Slightly adjusted for better mobile fit */
-}
-p {
-    font-size: 1.1em;
-    margin-bottom: 20px;
-}
-.form-group {
-    margin-bottom: 18px; /* Slightly adjusted margin */
-    text-align: left;
-}
-label {
-    display: block;
-    margin-bottom: 7px; /* Slightly adjusted margin */
-    font-weight: 600;
-    color: #555;
-    font-size: 0.95em; /* Make labels slightly smaller */
-}
-input[type="email"],
-input[type="password"] {
-    width: 100%; /* Make inputs take full width of their container */
-    padding: 12px 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1em; /* Keep font size consistent */
-    /* Ensure mobile browsers don't mess with appearance */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-button {
-    background-color: #ff9a8d;
-    color: white;
-    padding: 14px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: 700;
-    transition: background-color 0.3s ease;
-    width: 100%;
-}
-button:hover {
-    background-color: #ff7f70;
-}
-.error-message {
-    color: #e74c3c;
-    margin-top: 15px;
-    font-size: 0.9em;
-    display: none;
-}
-.success-message {
-    color: #27ae60;
-    margin-top: 15px;
-    font-size: 0.9em;
-    display: none;
-}
-.loading-spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #79addc;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    animation: spin 1s linear infinite;
-    display: none;
-    margin: 10px auto;
-}
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Adjustments for very small screens (e.g., iPhone 5/SE) */
-@media (max-width: 375px) {
-    .login-container {
-        padding: 25px 20px; /* More padding on very small screens */
-    }
-    h1 {
-        font-size: 2em;
-        margin-bottom: 20px;
-    }
-    p {
-        font-size: 1em;
-    }
-    label, input, button {
-        font-size: 0.95em; /* Slightly smaller for compactness */
-    }
-}
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Header-Bereich */
-header {
-    background-color: var(--primary-light-blue);
-    color: var(--text-dark);
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Leichter Schatten für den Header */
-}
-
-header .logo-slogan h1 {
-    font-family: 'Comfortaa', cursive; /* Spezielle Schriftart für den Firmennamen */
-    font-size: 2.8em;
-    margin-bottom: 5px;
-    color: var(--button-color); /* Firmenname in Akzentfarbe */
-}
-
-header .logo-slogan p {
-    font-size: 1.2em;
-    color: var(--text-dark);
-}
-
-/* Navigationsmenü */
-nav {
-    background-color: var(--accent-mint);
-    padding: 10px 0;
-    text-align: center;
-    position: sticky; /* Sticky Navigation */
-    top: 0;
-    z-index: 1000; /* Stellt sicher, dass die Navigation über anderen Elementen liegt */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Ermöglicht Umbruch auf kleineren Bildschirmen */
-}
-
-nav ul li {
-    margin: 0 15px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: bold;
-    padding: 5px 10px;
-    transition: color 0.3s ease, background-color 0.3s ease;
-    border-radius: 5px;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    color: var(--text-light);
-    background-color: var(--button-color);
-}
-
-/* Hero-Bereich (Startseite) */
-.hero {
-    background-color: var(--accent-rose);
-    padding: 80px 20px;
-    text-align: center;
-    color: var(--text-dark);
-    position: relative;
-    overflow: hidden;
-    min-height: 500px; /* Mindesthöhe für den Hero-Bereich */
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* --- Lade-Overlay --- */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.hero h2 {
-    font-family: 'Comfortaa', cursive;
-    font-size: 3em;
-    margin-bottom: 20px;
-    color: var(--button-color);
+.loading-overlay.hidden {
+    display: none;
 }
 
-.hero p {
-    font-size: 1.4em;
-    max-width: 800px;
-    margin: 0 auto 30px auto;
+/* --- Login-Seite --- */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 1rem;
 }
 
-.hero-button {
-    display: inline-block;
-    background-color: var(--button-color);
-    color: var(--text-light);
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 50px; /* Abgerundeter Button */
-    font-size: 1.2em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Leichter Schatten für den Button */
-}
-
-.hero-button:hover {
-    background-color: var(--button-hover);
-    transform: translateY(-2px); /* Leichter Hoch-Effekt beim Hover */
-}
-
-/* Platzhalter für Icons/Illustrationen (Unicode-Ersatz) */
-.hero .illustration {
-    margin-top: 40px;
-    font-size: 4em; /* Größe des Icons */
-    color: var(--button-color);
-    line-height: 1; /* Stellt sicher, dass das Icon nicht zu viel Platz einnimmt */
-}
-
-/* Leistungen-Bereich */
-.services {
-    padding: 60px 20px;
-    text-align: center;
-    background-color: var(--secondary-beige);
-}
-
-.services h2 {
-    font-family: 'Comfortaa', cursive;
-    font-size: 2.5em;
-    margin-bottom: 40px;
-    color: var(--button-color);
-}
-
-.service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsives Grid */
-    gap: 30px; /* Abstand zwischen den Service-Elementen */
-}
-
-.service-item {
-    background-color: var(--primary-light-blue);
-    padding: 30px;
-    border-radius: 15px; /* Abgerundete Ecken */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease;
-}
-
-.service-item:hover {
-    transform: translateY(-5px); /* Leichter Hoch-Effekt beim Hover */
-}
-
-.service-item .icon {
-    font-size: 3em;
-    margin-bottom: 15px;
-    color: var(--button-color);
-    line-height: 1;
-}
-
-.service-item h3 {
-    font-family: 'Comfortaa', cursive;
-    font-size: 1.8em;
-    margin-bottom: 10px;
-    color: var(--text-dark);
-}
-
-.service-item p {
-    font-size: 1.1em;
-    color: var(--text-dark);
-}
-
-/* Über Mich-Bereich */
-.about {
-    background-color: var(--accent-rose);
-    padding: 60px 20px;
-    text-align: center;
-}
-
-.about h2 {
-    font-family: 'Comfortaa', cursive;
-    font-size: 2.5em;
-    margin-bottom: 40px;
-    color: var(--button-color);
-}
-
-.about-content {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: left;
-    font-size: 1.15em;
-    line-height: 1.8;
-    color: var(--text-dark);
-}
-
-.about-content p {
-    margin-bottom: 20px;
-}
-
-/* Kontakt-Bereich */
-.contact {
-    padding: 60px 20px;
-    background-color: var(--primary-light-blue);
-    text-align: center;
-}
-
-.contact h2 {
-    font-family: 'Comfortaa', cursive;
-    font-size: 2.5em;
-    margin-bottom: 40px;
-    color: var(--button-color);
-}
-
-.contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: var(--secondary-beige);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: left;
-}
-
-.contact-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: var(--text-dark);
-}
-
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
+.login-box {
+    background-color: var(--white-color);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1em;
-    background-color: var(--text-light); /* Weiße Felder für bessere Lesbarkeit */
-    color: var(--text-dark);
+    max-width: 420px;
+    text-align: center;
 }
 
-.contact-form textarea {
-    resize: vertical; /* Ermöglicht vertikales Resizing */
-    min-height: 120px;
+.login-box h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.contact-form button {
-    display: block;
+.login-box p {
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+.login-form input {
     width: 100%;
-    background-color: var(--button-color);
-    color: var(--text-light);
-    padding: 15px 20px;
+    padding: 0.9rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-family: var(--font-family);
+    font-size: 1rem;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(138, 154, 91, 0.2);
+}
+
+.btn {
+    width: 100%;
+    padding: 0.9rem;
     border: none;
-    border-radius: 50px;
-    font-size: 1.2em;
-    font-weight: bold;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.contact-form button:hover {
-    background-color: var(--button-hover);
+.btn:hover {
     transform: translateY(-2px);
 }
 
-/* Footer-Bereich */
-footer {
-    background-color: var(--accent-mint);
-    color: var(--text-dark);
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.btn-primary:hover {
+    background-color: #7a8a4f;
+}
+
+.btn-google {
+    background-color: var(--white-color);
+    color: #444;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.btn-google img {
+    width: 20px;
+    height: 20px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
     text-align: center;
-    padding: 20px 0;
-    font-size: 0.9em;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.05); /* Leichter Schatten über dem Footer */
+    color: #aaa;
+    margin: 1.5rem 0;
 }
 
-/* Responsive Design Anpassungen */
-@media (max-width: 768px) {
-    header .logo-slogan h1 {
-        font-size: 2.2em;
-    }
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
 
-    header .logo-slogan p {
-        font-size: 1em;
-    }
+.divider:not(:empty)::before {
+    margin-right: .5em;
+}
 
-    nav ul {
-        flex-direction: column; /* Navigationselemente untereinander auf kleinen Bildschirmen */
-    }
+.divider:not(:empty)::after {
+    margin-left: .5em;
+}
 
-    nav ul li {
-        margin: 5px 0;
-    }
+.error-message {
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    display: none; /* Standardmäßig ausgeblendet */
+}
 
-    .hero h2 {
-        font-size: 2.2em;
-    }
+/* --- Landingpage (index.html) --- */
 
-    .hero p {
-        font-size: 1.1em;
-    }
+/* Header */
+.main-header {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 500;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
 
-    .services h2,
-    .about h2,
-    .contact h2 {
-        font-size: 2em;
-    }
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    .service-item {
-        padding: 20px;
-    }
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
 
-    .service-item h3 {
-        font-size: 1.5em;
-    }
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
 
-    .service-item p {
-        font-size: 1em;
-    }
+.main-nav a, .user-info a {
+    color: #555;
+    font-weight: 700;
+    transition: color 0.3s;
+}
 
-    .about-content {
-        font-size: 1em;
-    }
+.main-nav a:hover, .user-info a:hover {
+    color: var(--primary-color);
+}
 
-    .contact-form {
-        padding: 30px;
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-email {
+    font-size: 0.9rem;
+    color: #777;
+    display: none; /* Auf kleinen Bildschirmen ausblenden */
+}
+
+@media (min-width: 768px) {
+    .user-email {
+        display: inline;
     }
 }
 
-@media (max-width: 480px) {
-    .container {
-        padding: 10px;
-    }
+.logout-btn {
+    background-color: var(--accent-color-light);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+}
+.logout-btn:hover {
+    background-color: var(--accent-color-dark);
+}
 
-    .hero {
-        padding: 50px 15px;
-    }
+.mobile-nav-toggle {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
 
-    .hero h2 {
-        font-size: 1.8em;
-    }
+/* Main Content */
+main {
+    padding-top: 80px; /* Platz für den fixierten Header */
+    flex-grow: 1;
+}
 
-    .hero p {
-        font-size: 1em;
-    }
+section {
+    padding: 4rem 0;
+}
 
-    .hero-button {
-        padding: 12px 25px;
-        font-size: 1em;
-    }
+section:nth-of-type(odd) {
+    background-color: var(--white-color);
+}
 
-    .services, .about, .contact {
-        padding: 40px 15px;
-    }
+/* Hero Sektion */
+.hero {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white-color);
+}
 
-    .services h2,
-    .about h2,
-    .contact h2 {
-        font-size: 1.8em;
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://placehold.co/1600x900/E6DCD2/333333?text=Familie+mit+Baby');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6);
+    z-index: -1;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    color: var(--white-color);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Über Mich Sektion */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+.about-image img {
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+}
+
+.section-title p {
+    max-width: 700px;
+    margin: 0.5rem auto 0;
+    color: #666;
+}
+
+/* Dienstleistungen Sektion */
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.service-card {
+    background-color: var(--white-color);
+    border-radius: 1rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.service-card img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.service-card-content {
+    padding: 1.5rem;
+}
+
+.service-card h3 {
+    margin-bottom: 0.5rem;
+}
+
+/* Kontakt Sektion */
+.contact-form {
+    max-width: 700px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-family: var(--font-family);
+    font-size: 1rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(138, 154, 91, 0.2);
+}
+
+.contact-form .btn {
+    justify-self: center;
+    width: auto;
+    padding: 1rem 2.5rem;
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--accent-color-light);
+    padding: 2rem 0;
+    text-align: center;
+    color: #555;
+    margin-top: auto;
+}
+
+.footer-links {
+    margin-top: 0.5rem;
+}
+
+.footer-links a {
+    margin: 0 1rem;
+    color: #555;
+}
+
+/* Mobile Navigation */
+@media (max-width: 767px) {
+    .main-nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        padding: 1rem 0;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+    }
+    .main-nav.active {
+        display: flex;
+    }
+    .main-nav li {
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+    .user-info {
+        display: none; /* Info im mobilen Menü anzeigen */
+    }
+    .mobile-nav-toggle {
+        display: block;
     }
 }

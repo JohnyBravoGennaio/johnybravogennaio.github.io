@@ -3,28 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>muckiglück – Geborgen wachsen, begleitet mit Herz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <title>muckiglück | Familienbegleitung</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .welcome-message { text-align: center; margin-top: 20px; font-size: 1.2em; color: #555; }
-        .logout-container { text-align: center; margin-top: 20px; }
-        .logout-button { background-color: #e74c3c; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; transition: background-color 0.3s ease; }
-        .logout-button:hover { background-color: #c0392b; }
-        /* Styling for form status messages */
-        .form-status { text-align: center; margin-top: 15px; font-weight: bold; }
-        .form-status.success { color: #2ecc71; }
-        .form-status.error { color: #e74c3c; }
-    </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo-slogan">
-                <h1>muckiglück</h1>
-                <p>Geborgen wachsen – begleitet mit Herz</p>
+
+    <!-- Ladeanzeige, während Firebase prüft -->
+    <div class="loading-overlay" id="loading-overlay">
+        <h1 class="logo">muckiglück</h1>
+        <p>Seite wird geladen...</p>
+    </div>
+
+    <div id="main-content" style="display: none;">
+        <header class="main-header">
+            <div class="container">
+                <a href="#" class="logo">muckiglück</a>
+                <nav class="main-nav" id="main-nav">
+                    <ul>
+                        <li><a href="#about">Über mich</a></li>
+                        <li><a href="#services">Leistungen</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
+                    </ul>
+                </nav>
+                <div class="user-info">
+                    <span class="user-email" id="user-email"></span>
+                    <a href="#" class="logout-btn" id="logout-btn">Abmelden</a>
+                </div>
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle">
+                    <i data-lucide="menu"></i>
+                </button>
             </div>
-        </div>
-    </header>
+        </header>
+
+        <main>
+            <!-- Hero Sektion -->
+            <section class="hero">
+                <div class="hero-content container">
+                    <h1>muckiglück</h1>
+                    <p>Verlässliche Begleitung für Familien – individuell & mit Herz.</p>
+                </div>
+            </section>
+
+            <!-- Über Mich Sektion -->
+            <section id="about">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Hallo, ich bin Sophie</h2>
+                    </div>
+                    <div class="about-grid">
+                        <div class="about-image">
+                            <img src="https://placehold.co/400x400/8A9A5B/FFFFFF?text=Sophie" alt="[Porträtfoto von Sophie]">
+                        </div>
+                        <div class="about-text">
+                            <p>Als Mutter weiß ich, dass der Familienalltag wunderschön, aber auch herausfordernd sein kann. Mit "muckiglück" habe ich es mir zur Aufgabe gemacht, Familien in den verschiedensten Phasen zu unterstützen.</p>
+                            <p>Meine Qualifikationen in der Familienbegleitung und diversen Beratungsbereichen ermöglichen es mir, euch fundiertes Wissen und praktische Hilfe an die Hand zu geben – immer auf Augenhöhe, ohne Druck und mit viel Empathie. Mein Ziel ist es, euch zu bestärken, euren eigenen, individuellen Weg zu finden, der sich für euch als Familie richtig anfühlt.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dienstleistungen Sektion -->
+            <section id="services">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Meine Angebote für euch</h2>
+                        <p>Ich biete euch eine liebevolle und fachkundige Begleitung in verschiedenen Bereichen des Familienlebens. Findet heraus, wie ich euch unterstützen kann.</p>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <img src="https://placehold.co/600x400/E6DCD2/333333?text=Familienbegleitung" alt="[Bild einer Familie]">
+                            <div class="service-card-content">
+                                <h3>Familienbegleitung</h3>
+                                <p>Vom positiven Schwangerschaftstest bis ins Kleinkindalter – ich begleite euch bei allen Fragen und Unsicherheiten, die diese aufregende Zeit mit sich bringt.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="https://placehold.co/600x400/D9C8B8/333333?text=Schlafberatung" alt="[Bild eines schlafenden Babys]">
+                            <div class="service-card-content">
+                                <h3>Schlafberatung</h3>
+                                <p>Wenn die Nächte zur Belastung werden, finden wir gemeinsam einen sanften und bindungsorientierten Weg zu mehr Ruhe und erholsamem Schlaf für die ganze Familie.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="https://placehold.co/600x400/C9B8A4/333333?text=Beikost" alt="[Bild eines Babys beim Essen]">
+                            <div class="service-card-content">
+                                <h3>Beikost-Beratung</h3>
+                                <p>Brei oder 'Baby Led Weaning'? Ich helfe euch, den richtigen Weg für den Start in die Beikost zu finden, der zu euch und eurem Baby passt – ganz ohne Stress.</p>
+                            </div>
+                        </div>
+                         <div class="service-card">
+                            <img src="https://placehold.co/600x400/BDB0A4/333333?text=Stillberatung" alt="[Bild einer Mutter, die ihr Baby stillt]">
+                            <div class="service-card-content">
+                                <h3>Stillberatung</h3>
+                                <p>Das Stillen ist ein natürlicher Prozess, der aber manchmal Unterstützung braucht. Ich stehe euch bei Stillproblemen zur Seite und helfe euch, eine entspannte Stillbeziehung aufzubauen.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="https://placehold.co/600x400/A9A299/333333?text=Workshops" alt="[Bild einer Gruppe von Eltern]">
+                            <div class="service-card-content">
+                                <h3>Workshops & Vorträge</h3>
+                                <p>In meinen Workshops teile ich mein Wissen zu verschiedenen Familienthemen. Eine tolle Möglichkeit, sich zu informieren und mit anderen Eltern auszutauschen.</p>
+                            </div>
+                        </div>
+                         <div class="service-card">
+                            <img src="https://placehold.co/600x400/9A8F85/333333?text=Kontakt" alt="[Bild eines Telefons und Notizblocks]">
+                            <div class="service-card-content">
+                                <h3>Individuelle Pakete</h3>
+                                <p>Jede Familie ist einzigartig. Gerne erstelle ich ein individuelles Paket, das genau auf eure Bedürfnisse und Wünsche zugeschnitten ist. Sprecht mich einfach an!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kontakt Sektion -->
+            <section id="contact">
+                 <div class="container">
+                    <div class="section-title">
+                        <h2>Nehmt Kontakt auf</h2>
+                        <p>Ich freue mich darauf, von euch zu hören. Schreibt mir eine Nachricht, und ich melde mich so bald wie möglich bei euch.</p>
+                    </div>
+                    <form class="contact-form">
+                        <input type="text" placeholder="Dein Name" required>
+                        <input type="email" placeholder="Deine E-Mail" required>
+                        <textarea placeholder="Deine Nachricht" rows="6" required></textarea>
+                        <button type="submit" class="btn btn-primary">Nachricht senden</button>
+                    </form>
+                 </div>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <div class="container">
+                <p>&copy; 2025 muckiglück</p>
+                <div class="footer-links">
+                    <a href="#">Impressum</a>
+                    <a href="#">Datenschutz</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // WICHTIG: Ersetzen Sie dies durch Ihre eigene Firebase-Konfiguration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAlDyv4LGkYFzDWwVwVTpfyxEmpROz115o",
+            authDomain: "muckiglueckauth.firebaseapp.com",
+            projectId: "muckiglueckauth",
+            storageBucket: "muckiglueckauth.firebasestorage.app",
+            messagingSenderId: "550834074850",
+            appId: "1:550834074850:web:e83a073d702b1fd9e09abb"
+        };
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const mainContent = document.getElementById('main-content');
+        const userEmailSpan = document.getElementById('user-email');
+        const logoutBtn = document.getElementById('logout-btn');
+        const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+        const mainNav = document.getElementById('main-nav');
+
+        // Listener für den Anmeldestatus
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Benutzer ist angemeldet, Inhalt anzeigen
+                userEmailSpan.textContent = user.email;
+                loadingOverlay.classList.add('hidden');
+                mainContent.style.display = 'block';
+                lucide.createIcons(); // Lucide Icons initialisieren
+            } else {
+                // Benutzer ist nicht angemeldet, zurück zur Login-Seite
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Logout-Funktion
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            signOut(auth).catch((error) => {
+                console.error('Fehler beim Abmelden:', error);
+            });
+        });
+
+        // Mobile Navigation
+        mobileNavToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            const icon = mobileNavToggle.querySelector('i');
+            icon.setAttribute('data-lucide', mainNav.classList.contains('active') ? 'x' : 'menu');
+            lucide.createIcons();
+        });
+
+    </script>
 </body>
 </html>
