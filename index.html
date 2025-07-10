@@ -119,18 +119,14 @@
 
             <!-- Kontakt Sektion -->
             <section id="contact">
-                 <div class="container">
+                <div class="container">
                     <div class="section-title">
                         <h2>Nehmt Kontakt auf</h2>
                         <p>Ich freue mich darauf, von euch zu hören. Schreibt mir eine Nachricht, und ich melde mich so bald wie möglich bei euch.</p>
                     </div>
-                    <form class="contact-form">
-                        <input type="text" placeholder="Dein Name" required>
-                        <input type="email" placeholder="Deine E-Mail" required>
-                        <textarea placeholder="Deine Nachricht" rows="6" required></textarea>
-                        <button type="submit" class="btn btn-primary">Nachricht senden</button>
+                    <form class="contact-form" id="contact-form"> <input type="text" name="from_name" placeholder="Dein Name" required> <input type="email" name="from_email" placeholder="Deine E-Mail" required> <textarea name="message" placeholder="Deine Nachricht" rows="6" required></textarea> <button type="submit" class="btn btn-primary">Nachricht senden</button>
                     </form>
-                 </div>
+                    <div id="contact-status" style="margin-top: 15px; text-align: center; font-weight: bold;"></div> </div>
             </section>
         </main>
 
