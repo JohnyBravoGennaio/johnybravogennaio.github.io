@@ -200,6 +200,48 @@
             lucide.createIcons();
         });
 
+        // ------------------- NEU: Google Apps Script Logik -------------------
+
+        const contactForm = document.getElementById('contact-form');
+        const contactStatus = document.getElementById('contact-status');
+        
+        // Fügen Sie hier die URL ein, die Sie bei der Bereitstellung des Skripts kopiert haben.
+        const googleScriptURL = 'https://script.google.com/macros/s/AKfycbxejH4sxZu3uEz_oOn_xP8_3uv9awVz1nPsSeUdoPw2uN44Ft6to96EKolA8OSH9GXs/exec';
+
+        contactForm.addEventListener('submit', e => {
+            e.preventDefault(); // Verhindert das Neuladen der Seite
+
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sende...';
+            contactStatus.textContent = '';
+            
+            // Senden der Formulardaten an das Google Apps Script
+            fetch(googleScriptURL, { 
+                method: 'POST', 
+                body: new FormData(contactForm)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    contactStatus.textContent = 'Vielen Dank! Deine Nachricht wurde erfolgreich gesendet.';
+                    contactStatus.style.color = '#8A9A5B';
+                    contactForm.reset();
+                } else {
+                    throw new Error(data.error || 'Unbekannter Fehler');
+                }
+            })
+            .catch(error => {
+                contactStatus.textContent = 'Fehler! Deine Nachricht konnte nicht gesendet werden.';
+                contactStatus.style.color = '#C04000';
+                console.error('Fehler beim Senden:', error);
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Nachricht senden';
+            });
+        });
+
     </script>
 </body>
 </html>
