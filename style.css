@@ -89,7 +89,7 @@ a {
 
 .login-box {
     /*background-color: var(--white-color);*/
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 2.5rem;
     border-radius: 1rem;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
@@ -286,7 +286,7 @@ section {
 
 section:nth-of-type(odd) {
     /*background-color: var(--white-color);*/
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Hero Sektion */
