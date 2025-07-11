@@ -301,7 +301,7 @@ section:nth-of-type(odd) {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://placehold.co/1600x900/E6DCD2/333333?text=Familie+mit+Baby');
+    background-image: url('images/Background.jpg');
     background-size: cover;
     background-position: center;
     filter: brightness(0.6);
