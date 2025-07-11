@@ -22,6 +22,11 @@ html {
 }
 
 body {
+    background-image: url('images/Background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
     font-family: var(--font-family);
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -301,7 +306,7 @@ section:nth-of-type(odd) {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('images/Background.jpg');
+    background-image: url('https://placehold.co/1600x900/E6DCD2/333333?text=Familie+mit+Baby');
     background-size: cover;
     background-position: center;
     filter: brightness(0.6);
