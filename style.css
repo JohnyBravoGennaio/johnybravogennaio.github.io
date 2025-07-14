@@ -298,7 +298,7 @@ section:nth-of-type(odd) {
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--white-color);
+    /*color: var(--white-color);*/
 }
 
 .hero::before {
