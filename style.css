@@ -313,7 +313,7 @@ section:nth-of-type(odd) {
     background-image: url('images/Logo.jpg'); /* Adjust path if needed */
     background-repeat: no-repeat; /* Good for backgrounds */
     background-attachment: fixed; /* For parallax-like effect */
-    filter: brightness(0.6); /* Adjust as desired for darkness */
+    filter: brightness(1.0); /* Adjust as desired for darkness */
     z-index: -1;
 }
 
