@@ -1,14 +1,14 @@
 /* --- Allgemeine Stile & Schriftarten --- */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand:wght@300;400;700&display=swap');
 
 :root {
     --bg-color: #FBF8F3; /* Sanftes Creme */
-    --primary-color: #8A9A5B; /* Sanftes Olivgrün */
+    --primary-color: #C4CBBA; /* Sanftes Olivgrün */
     --accent-color-light: #E6DCD2; /* Helles Beige */
     --accent-color-dark: #BDB0A4; /* Dunkleres Beige */
     --text-color: #333333;
     --white-color: #FFFFFF;
-    --font-family: 'Lato', sans-serif;
+    --font-family: 'Gochi Hand', cursive;
 }
 
 * {
