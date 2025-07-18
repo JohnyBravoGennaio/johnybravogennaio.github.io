@@ -313,6 +313,7 @@ section:nth-of-type(odd) {
     background-image: url('images/Logo.jpg'); /* Adjust path if needed */
     background-repeat: no-repeat; /* Good for backgrounds */
     z-index: -1;
+    background-color: #F8F5EC;
 }
 
 .hero-content {
