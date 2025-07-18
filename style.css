@@ -23,7 +23,6 @@ html {
 
 body {
     background-image: url('images/BackgroundFleck.jpg');
-    background-size: cover;
     background-repeat: repeat;
     background-position:center;
     background-attachment: scroll;
@@ -312,17 +311,12 @@ section:nth-of-type(odd) {
     background-position: center;
     background-image: url('images/Logo.jpg'); /* Adjust path if needed */
     background-repeat: no-repeat; /* Good for backgrounds */
-    filter: brightness(1.0); /* Adjust as desired for darkness */
     z-index: -1;
 }
 
 .hero-content {
     max-width: 800px;
     min-height: 300px;
-        background-size: contain;
-    background-position: center;
-    background-image: url('images/Logo.jpg'); /* Adjust path if needed */
-    background-repeat: no-repeat; /* Good for backgrounds */
 }
 
 .hero h1 {
