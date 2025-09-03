@@ -18,7 +18,7 @@
     <div id="main-content" style="display: none;">
         <header class="main-header">
             <div class="container">
-                <a href="#" class="logo">muckiglück</a>
+                <a href="https://www.muckiglueck.de" class="logo">muckiglück</a>
                 <nav class="main-nav" id="main-nav">
                     <ul>
                         <li><a href="#about">Über mich</a></li>
@@ -122,7 +122,17 @@
                         <h2>Nehmt Kontakt auf</h2>
                         <p>Ich freue mich darauf, von euch zu hören. Schreibt mir eine Nachricht, und ich melde mich so bald wie möglich bei euch.</p>
                     </div>
-                    <form class="contact-form" id="contact-form"> <input type="text" name="from_name" placeholder="Dein Name" required> <input type="email" name="from_email" placeholder="Deine E-Mail" required> <textarea name="message" placeholder="Deine Nachricht" rows="6" required></textarea> <button type="submit" class="btn btn-primary">Nachricht senden</button>
+                    <form class="contact-form" id="contact-form">
+                        <input type="text" name="from_name" placeholder="Dein Name" required>
+                        <input type="email" name="from_email" placeholder="Deine E-Mail" required>
+                        <textarea name="message" placeholder="Deine Nachricht" rows="6" required></textarea>
+                        
+                        <div class="privacy-consent">
+                            <input type="checkbox" id="privacy-check" name="privacy-consent" required>
+                            <label for="privacy-check">Ich habe die <a href="https://www.muckiglueck.de/datenschutz">Datenschutzerklärung</a> gelesen und stimme zu.</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="submit-btn" disabled>Nachricht senden</button>
                     </form>
                     <div id="contact-status" style="margin-top: 15px; text-align: center; font-weight: bold;"></div> </div>
             </section>
@@ -132,8 +142,8 @@
             <div class="container">
                 <p>&copy; 2025 muckiglück</p>
                 <div class="footer-links">
-                    <a href="#">Impressum</a>
-                    <a href="#">Datenschutz</a>
+                    <a href="https://www.muckiglueck.de/impressum">Impressum</a>
+                    <a href="https://www.muckiglueck.de/datenschutz">Datenschutz</a>
                 </div>
             </div>
         </footer>
@@ -193,6 +203,16 @@
             icon.setAttribute('data-lucide', mainNav.classList.contains('active') ? 'x' : 'menu');
             lucide.createIcons();
         });
+
+        // ------------------- NEU: Checkbox Logik -------------------
+        const privacyCheckbox = document.getElementById('privacy-check');
+        const submitButton = document.getElementById('submit-btn');
+
+        if (privacyCheckbox && submitButton) {
+            privacyCheckbox.addEventListener('change', () => {
+                submitButton.disabled = !privacyCheckbox.checked;
+            });
+        }
 
         // ------------------- NEU: Google Apps Script Logik -------------------
 
