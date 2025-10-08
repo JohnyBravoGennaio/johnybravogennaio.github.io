@@ -3,12 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>muckiglück | Impressum</title>
+    <title>muckiglück | Qualifikation</title>
     <link rel="stylesheet" href="style.css">
     <style>
     body {
         font-family: Arial, sans-serif;
+        margin: 0; 
+        padding: 0; 
     }
+
+    html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Style for the centered image maintaining its size */
+    #full-page-image {
+        /* Size/Aspect Ratio Control */
+        max-width: 100%; /* Prevents image from exceeding browser width */
+        height: auto;    /* Maintains correct aspect ratio */
+        
+        /* Centering Control (The new part) */
+        display: block;  /* CRITICAL: Must be a block element to accept margins */
+        margin-left: auto; /* Centers the image */
+        margin-right: auto; /* Centers the image */
+        
+        /* Spacing */
+        margin-bottom: 20px; 
+    }
+
+    .main-header, .main-footer {
+        background-color: #fff;
+        position: relative; 
+    }
+    
+    .qualifikation-content .container {
+        padding: 20px; 
+    }
+
     </style>
 </head>
 <body>
@@ -27,25 +60,13 @@
     </header>
 
     <main>
-        <section class="impressum-content">
+
+        
+        <section class="qualifikation-content">
             <div class="container">
-                <h2>Impressum</h2>
-
-                <h3>Angaben gemäß § 5 TMG:</h3>
-                <p><strong>Name / Firma:</strong><br>
-                Sophie Ickert / muckiglück</p>
-                <p><strong>Anschrift:</strong><br>
-                Auf der Lehmkaul 12<br>
-                56759 Kalenborn<br>
-                Deutschland</p>
-                <p><strong>Kontakt:</strong><br>
-                E-Mail: <a href="mailto:info@muckiglueck.de">info@muckiglueck.de</a></p>
-                <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</strong><br>
-                Sophie Ickert / muckiglück, Auf der Lehmkaul 12, 56759 Kalenborn, Deutschland</p>
-
-                <h3>Haftungsausschluss</h3>
-                <p>Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
-            </div>
+                <h2>Qualifikation</h2>
+                        <img id="full-page-image" src="images/qualifikation.jpg" alt="Vollflächiges Bild">
+                </div>
         </section>
     </main>
 
