@@ -471,13 +471,13 @@ section .container {
 
 /* DIE ENTSCHEIDENDE ÄNDERUNG: Die Liste der Menüpunkte */
     body {
-        /* Auf manchen mobilen Browsern führt 'fixed' zu Fehlern, 
-           'scroll' ist hier oft die sicherere Wahl für flüssige Performance */
-        background-attachment: scroll;
+        /* Lädt ein spezielles, scharfes Hochformat-Bild für Handys */
+        background-image: url('images/Background-mobile.png');
         
-        /* Optional: Falls das Bild auf dem Handy zu sehr "hineinzoomt", 
-           kannst du hier die Position noch feiner justieren */
-        background-position: 35% top; 
+        /* Jetzt funktioniert cover wieder perfekt, ohne zu pixelig zu werden */
+        background-size: cover; 
+        background-attachment: scroll;
+        background-position: center top;
     }
 
     .main-nav ul {
