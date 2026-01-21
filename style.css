@@ -30,12 +30,16 @@ body {
     
     /* Hintergrundbild Konfiguration */
     background-image: url('images/Background.png');
-    background-size: cover;
     
-    /* WICHTIGE ÄNDERUNG: */
-    background-position: center top;  /* <-- Vorher: center center */
+    /* Sorgt dafür, dass das Bild immer den ganzen Bildschirm füllt */
+    background-size: cover; 
     
-    background-attachment: fixed;
+    /* Fixiert das Bild oben in der Mitte, damit Köpfe/Motive sichtbar bleiben */
+    background-position: center top; 
+    
+    /* Verhindert, dass das Bild mitscrollt (sieht auf Mobilgeräten oft besser aus) */
+    background-attachment: fixed; 
+    background-repeat: no-repeat;
 }
 
 a {
@@ -445,7 +449,7 @@ section .container {
     }
 
     .main-nav {
-position: fixed;
+        position: fixed;
         top: 0;
         right: 0;
         width: 100%; /* Volle Breite auf Mobile */
@@ -466,6 +470,16 @@ position: fixed;
     }
 
 /* DIE ENTSCHEIDENDE ÄNDERUNG: Die Liste der Menüpunkte */
+    body {
+        /* Auf manchen mobilen Browsern führt 'fixed' zu Fehlern, 
+           'scroll' ist hier oft die sicherere Wahl für flüssige Performance */
+        background-attachment: scroll;
+        
+        /* Optional: Falls das Bild auf dem Handy zu sehr "hineinzoomt", 
+           kannst du hier die Position noch feiner justieren */
+        background-position: 35% top; 
+    }
+
     .main-nav ul {
         display: flex;
         flex-direction: column; /* Menüpunkte untereinander */
@@ -498,6 +512,9 @@ position: fixed;
     }
 
     .hero {
-        height: 50vh;
+        /* Sicherstellen, dass der Hero-Bereich auf Handys 
+           wirklich den ganzen Platz einnimmt */
+        height: 100vh;
+        height: -webkit-fill-available; /* Spezialkorrektur für Safari Mobile */
     }
 }
