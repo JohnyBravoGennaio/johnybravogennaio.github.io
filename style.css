@@ -471,13 +471,23 @@ section .container {
 
 /* DIE ENTSCHEIDENDE ÄNDERUNG: Die Liste der Menüpunkte */
 body {
+        background-image: none !important;
+        background-color: #f0f4f0; 
+    }
+
+    /* Das neue Element wird fest am Bildschirm "angeklebt" */
+    .mobile-bg-fix {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
         background-image: url('images/Background-mobile.png');
-        /* WICHTIG: Ersetze 'cover' durch '100% auto' oder fixiere die Ansicht */
-        background-size: 100% auto; 
-        background-attachment: fixed; /* Auf modernen Handys funktioniert das mittlerweile gut */
+        background-size: cover;
         background-position: center top;
         background-repeat: no-repeat;
-        background-color: #f0f4f0; /* Die Farbe füllt den Rest der Seite unten auf */
+        z-index: -1; /* Schiebt das Bild hinter den Text */
+        will-change: transform; /* Optimiert die Performance beim Scrollen */
     }
 
     .main-nav ul {
@@ -511,10 +521,20 @@ body {
         font-size: 2rem;
     }
 
-    .hero {
-        /* Sicherstellen, dass der Hero-Bereich auf Handys 
-           wirklich den ganzen Platz einnimmt */
+.hero {
+        /* Der Hero-Bereich ist jetzt komplett durchsichtig */
         height: 100vh;
-        height: -webkit-fill-available; /* Spezialkorrektur für Safari Mobile */
+        background: transparent !important;
+    }
+
+    /* Deine Inhalts-Boxen schieben sich nun darüber */
+    section .container {
+        margin-bottom: 20px; /* Kleiner Abstand zwischen den Boxen */
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-bg-fix {
+        display: none;
     }
 }
