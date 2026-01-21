@@ -1,0 +1,73 @@
+Erstelle eine professionelle und schlichte HTML-Webseite (kein Framework wie React, nur HTML, CSS, optional Vanilla JS) für die freiberufliche Anbieterin Sophie, die unter dem Firmennamen „muckiglück“ arbeitet.
+
+Sie bietet folgende familienbezogene Dienstleistungen an:
+
+Familienbegleitung
+
+Schlafberatung
+
+Beikost-Beratung
+
+Stillberatung
+
+Workshops und Vorträge rund um diese Themen
+
+Die Webseite soll aus zwei HTML-Seiten bestehen:
+
+1. Login-Seite (login.html)
+Enthält ein Login-Formular mit:
+
+E-Mail & Passwort Login
+
+Google Login Button
+
+Anbindung an Google Firebase Authentication (verwende die neueste Firebase Web SDK, modular v9+)
+
+Bei erfolgreichem Login: Weiterleitung zur Landingpage (index.html)
+
+Bei Logout: Zurückleitung zur Login-Seite
+
+2. Landingpage (index.html)
+Nur zugänglich für eingeloggte Benutzer (Firebase Auth Check)
+
+Enthält:
+
+Header mit Logo „muckiglück“ und Navigationsmenü
+
+Hero-Sektion mit einem einfühlsamen, realistisch formulierten Begrüßungstext, z. B. „Verlässliche Begleitung für Familien – individuell & mit Herz.“
+
+Abschnitt „Über Sophie“ mit kurzer Vorstellung
+
+Übersicht der Dienstleistungen mit realistisch formulierten Beschreibungen (nicht werblich übertrieben, sondern authentisch und warm)
+
+Optionaler Bereich zu Workshops & Vorträgen
+
+Kontaktbereich mit Kontaktformular (kein Backend nötig, nur Layout)
+
+Footer mit Impressum und Datenschutz-Links
+
+💡 Design-Vorgaben
+Farben: Sanfte Pastellfarben oder warme Naturtöne, passend zum Thema Familie, Vertrauen, Geborgenheit
+
+Bilder: Platzhalter für familienfreundliche Bilder (z. B. Eltern mit Baby, Stillberatung, etc.)
+
+Schriftarten: Klar, freundlich, nicht verspielt (z. B. sans-serif)
+
+Layout: Schlicht, responsiv, übersichtlich
+
+🔐 Firebase Setup
+Nutze Firebase Authentication mit E-Mail/Passwort und Google Sign-In
+
+Integriere Firebase mit der modularen Web SDK (firebase/app, firebase/auth)
+
+Stelle sicher, dass die Landingpage nur geladen wird, wenn der Benutzer eingeloggt ist (z. B. über onAuthStateChanged)
+
+Bitte gib den vollständigen HTML-, CSS- und JavaScript-Code für beide Seiten aus:
+
+login.html
+
+index.html
+
+Optional: style.css (wenn ausgelagert)
+
+Die Texte sollen so formuliert sein, als ob Sophie direkt zu jungen Familien spricht – freundlich, verständlich, ehrlich.
