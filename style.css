@@ -471,13 +471,15 @@ section .container {
 
 /* DIE ENTSCHEIDENDE ÄNDERUNG: Die Liste der Menüpunkte */
     body {
-        /* Lädt ein spezielles, scharfes Hochformat-Bild für Handys */
         background-image: url('images/Background-mobile.png');
-        
-        /* Jetzt funktioniert cover wieder perfekt, ohne zu pixelig zu werden */
         background-size: cover; 
         background-attachment: scroll;
         background-position: center top;
+
+        /* ERGÄNZUNG: */
+        background-repeat: no-repeat;
+        background-color: #f0f4f0; /* Eine Farbe wählen, die zum Bild passt, falls man darüber hinaus scrollt */
+        min-height: 100vh;
     }
 
     .main-nav ul {
