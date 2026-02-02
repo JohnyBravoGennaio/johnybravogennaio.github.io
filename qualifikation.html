@@ -2,84 +2,55 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>muckiglück | Qualifikation</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0; 
-        padding: 0; 
-    }
-
-    html {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    /* Style for the centered image maintaining its size */
-    #full-page-image {
-        /* Size/Aspect Ratio Control */
-        max-width: 100%; /* Prevents image from exceeding browser width */
-        height: auto;    /* Maintains correct aspect ratio */
-        
-        /* Centering Control (The new part) */
-        display: block;  /* CRITICAL: Must be a block element to accept margins */
-        margin-left: auto; /* Centers the image */
-        margin-right: auto; /* Centers the image */
-        
-        /* Spacing */
-        margin-bottom: 20px; 
-    }
-
-    .main-header, .main-footer {
-        background-color: #fff;
-        position: relative; 
-    }
-    
-    .qualifikation-content .container {
-        padding: 20px; 
-    }
-
-    </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="container">
-            <a href="index.html" class="logo">muckiglück</a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html#about">Über mich</a></li>
-                    <li><a href="index.html#services">Leistungen</a></li>
-                    <li><a href="index.html#contact">Kontakt</a></li>
-                </ul>
-            </nav>
-        </div>
+    <header class="app-header">
+        <div class="logo">muckiglück</div>
+        <a href="index.html" style="color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Zurück</a>
     </header>
 
-    <main>
-
-        
-        <section class="qualifikation-content">
-            <div class="container">
-                <h2>Qualifikation</h2>
-                        <img id="full-page-image" src="images/qualifikation.jpg" alt="Vollflächiges Bild">
-                </div>
+    <main class="container" style="margin-top: 20px; padding-bottom: 40px;">
+        <section class="section-title">
+            <h2>Qualifikationen</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+                Fundiertes Wissen für eine liebevolle Begleitung.
+            </p>
         </section>
+
+        <div style="background: white; padding: 10px; border-radius: 20px; box-shadow: var(--shadow); margin-top: 20px;">
+            <img src="images/qualifikation.jpg" alt="Qualifikationsnachweise" 
+                 style="width: 100%; height: auto; border-radius: 12px; display: block;">
+        </div>
+
+        <div style="margin-top: 25px; line-height: 1.6; color: var(--text);">
+            <p>
+                Qualität und aktuelles Fachwissen sind mir wichtig. Hier siehst du eine Übersicht meiner Zertifizierungen in den Bereichen Familienbegleitung, Schlafberatung und Stillen.
+            </p>
+        </div>
     </main>
 
-    <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2025 muckiglück</p>
-            <div class="footer-links">
-                <a href="impressum.html">Impressum</a>
-                <a href="datenschutz.html">Datenschutz</a>
-                <a href="qualifikation.html">Qualifikation</a>
-            </div>
-        </div>
-    </footer>
-    
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="index.html#services" class="nav-item">
+            <i data-lucide="heart-handshake"></i>
+            <span>Angebot</span>
+        </a>
+        <a href="index.html#contact" class="nav-item">
+            <i data-lucide="mail"></i>
+            <span>Kontakt</span>
+        </a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

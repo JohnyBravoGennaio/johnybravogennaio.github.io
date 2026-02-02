@@ -2,92 +2,68 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>muckiglück | Datenschutzerklärung</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>muckiglück | Datenschutz</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    </style>    
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="container">
-            <a href="index.html" class="logo">muckiglück</a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html#about">Über mich</a></li>
-                    <li><a href="index.html#services">Leistungen</a></li>
-                    <li><a href="index.html#contact">Kontakt</a></li>
-                </ul>
-            </nav>
-        </div>
+    <header class="app-header">
+        <div class="logo">muckiglück</div>
+        <a href="index.html" style="color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Zurück</a>
     </header>
 
-    <main>
-        <section class="privacy-policy">
-            <div class="container">
-                <h2>Datenschutzerklärung</h2>
-                <p>Verantwortlicher:<br>
-                Sophie Ickert / muckiglück<br>
-                Auf der Lehmkaul 12, 56759 Kalenborn, Deutschland<br>
-                info@muckiglueck.de</p>
-
-                <h3>1. Allgemeine Hinweise</h3>
-                <p>Der Schutz Ihrer personenbezogenen Daten ist uns ein wichtiges Anliegen. Personenbezogene Daten werden nur im Rahmen der gesetzlichen Bestimmungen (DSGVO, BDSG) verarbeitet.</p>
-
-                <h3>2. Hosting & Content Delivery</h3>
-                <p>Unsere Website wird über Cloudflare bereitgestellt. Cloudflare verarbeitet dabei Daten, die zur Bereitstellung, Stabilität und Sicherheit der Website notwendig sind. Dazu können Ihre IP-Adresse, Browsertyp und weitere technische Informationen gehören.</p>
-                <p>Grundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse: Sicherheit und Performance der Website)</p>
-                <p>Cloudflare Datenschutz: <a href="https://www.cloudflare.com/privacypolicy/">https://www.cloudflare.com/privacypolicy/</a></p>
-                
-                <h3>3. Kontaktformular</h3>
-                <p>Wenn Sie unser Kontaktformular nutzen, werden folgende Daten verarbeitet:</p>
-                <ul style="margin-left: 20px;">
-                    <li>Name</li>
-                    <li>E-Mail-Adresse</li>
-                    <li>Nachricht/Anliegen</li>
-                </ul>
-                <p>Die Daten werden über Google-Dienste (Google Mail/Google Sheets/Apps Script) verarbeitet. Google fungiert dabei als Auftragsverarbeiter. Wir haben mit Google einen Auftragsverarbeitungsvertrag (AVV/DPA) abgeschlossen.</p>
-                <p>Zweck der Verarbeitung: Bearbeitung Ihrer Anfrage.<br>
-                Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung / Kundenanfrage)</p>
-                <p>Datenspeicherung: Die Daten werden nur so lange gespeichert, wie es zur Bearbeitung Ihrer Anfrage notwendig ist, danach gelöscht.</p>
-                <p>Google Datenschutzerklärung: <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></p>
-
-                <h3>4. Datenübermittlung in Drittländer</h3>
-                <p>Google verarbeitet Daten teilweise in den USA. Google nutzt dafür das EU-US Data Privacy Framework, um ein angemessenes Datenschutzniveau sicherzustellen.</p>
-
-                <h3>5. Ihre Rechte</h3>
-                <p>Sie haben das Recht:</p>
-                <ul style="margin-left: 20px;">
-                    <li>auf Auskunft über Ihre gespeicherten Daten</li>
-                    <li>auf Berichtigung, Löschung oder Einschränkung der Verarbeitung</li>
-                    <li>auf Widerspruch gegen die Verarbeitung</li>
-                    <li>auf Datenübertragbarkeit</li>
-                    <li>eine Beschwerde bei einer Datenschutzaufsichtsbehörde einzureichen</li>
-                </ul>
-                
-                <h3>6. Kontakt bei Fragen zum Datenschutz</h3>
-                <p>Bei Fragen zum Datenschutz können Sie sich an info@muckiglueck.de wenden.</p>
-
-                <h3>7. Änderungen der Datenschutzerklärung</h3>
-                <p>Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen. Bitte besuchen Sie die Seite regelmäßig, um die aktuelle Version einzusehen.</p>
-            </div>
+    <main class="container" style="margin-top: 20px; padding-bottom: 40px;">
+        <section class="section-title">
+            <h2>Datenschutzerklärung</h2>
         </section>
+
+        <div class="privacy-text" style="line-height: 1.6; color: var(--text); font-size: 0.9rem;">
+            <p><strong>Verantwortlicher:</strong><br>
+            Sophie Ickert / muckiglück<br>
+            Auf der Lehmkaul 12, 56759 Kalenborn<br>
+            E-Mail: info@muckiglueck.de</p>
+
+            <h3 style="color: var(--primary-dark);">1. Firebase Authentication (Login-Bereich)</h3>
+            <p>Für den geschützten Bereich dieser App nutzen wir <strong>Google Firebase Authentication</strong>. Um sich anzumelden, wird Ihre E-Mail-Adresse verarbeitet. Dies dient der Identifikation und Sicherung Ihres Nutzerkontos.</p>
+            <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</p>
+
+            <h3 style="color: var(--primary-dark);">2. Kontaktformular (Google Dienste)</h3>
+            <p>Anfragen über das Kontaktformular werden via <strong>Google Apps Script</strong> verarbeitet. Dabei werden Name, E-Mail und Nachricht gespeichert, um Ihr Anliegen zu bearbeiten.</p>
+            <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.</p>
+
+            <h3 style="color: var(--primary-dark);">3. Hosting & Sicherheit (Cloudflare)</h3>
+            <p>Diese Website nutzt <strong>Cloudflare</strong>, um die Ladezeiten zu optimieren und Angriffe abzuwehren (z.B. DDoS). Hierbei werden technische Daten wie Ihre IP-Adresse kurzzeitig verarbeitet.</p>
+            <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Berechtigtes Interesse an einer sicheren Website).</p>
+
+            <h3 style="color: var(--primary-dark);">4. Datenübermittlung (USA)</h3>
+            <p>Google (Firebase) und Cloudflare verarbeiten Daten auch in den USA. Beide Anbieter sind unter dem <strong>EU-US Data Privacy Framework</strong> zertifiziert, was ein angemessenes Datenschutzniveau garantiert.</p>
+
+            <h3 style="color: var(--primary-dark);">5. Ihre Rechte</h3>
+            <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung oder Einschränkung der Verarbeitung Ihrer bei uns gespeicherten Daten.</p>
+            
+            <p style="margin-top: 30px; font-style: italic;">Stand: Februar 2026</p>
+        </div>
     </main>
 
-    <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2025 muckiglück</p>
-            <div class="footer-links">
-                <a href="impressum.html">Impressum</a>
-                <a href="datenschutz.html">Datenschutz</a>
-                <a href="qualifikation.html">Qualifikation</a>
-            </div>
-        </div>
-    </footer>
-    
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="index.html#services" class="nav-item">
+            <i data-lucide="heart-handshake"></i>
+            <span>Angebot</span>
+        </a>
+        <a href="index.html#contact" class="nav-item">
+            <i data-lucide="mail"></i>
+            <span>Kontakt</span>
+        </a>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

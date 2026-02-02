@@ -2,63 +2,73 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>muckiglück | Impressum</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="container">
-            <a href="index.html" class="logo">muckiglück</a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html#about">Über mich</a></li>
-                    <li><a href="index.html#services">Leistungen</a></li>
-                    <li><a href="index.html#contact">Kontakt</a></li>
-                </ul>
-            </nav>
-        </div>
+    <header class="app-header">
+        <div class="logo">muckiglück</div>
+        <a href="index.html" style="color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Zurück</a>
     </header>
 
-    <main>
-        <section class="impressum-content">
-            <div class="container">
-                <h2>Impressum</h2>
+    <main class="container" style="margin-top: 20px;">
+        <section class="section-title">
+            <h2>Impressum</h2>
+        </section>
 
-                <h3>Angaben gemäß § 5 TMG:</h3>
-                <p><strong>Name / Firma:</strong><br>
-                Sophie Ickert / muckiglück</p>
-                <p><strong>Anschrift:</strong><br>
+        <article style="line-height: 1.6; color: var(--text);">
+            <h3 style="color: var(--primary-dark); font-size: 1rem; margin-top: 20px;">Angaben gemäß § 5 TMG</h3>
+            <p>
+                <strong>Sophie Ickert</strong><br>
+                muckiglück<br>
                 Auf der Lehmkaul 12<br>
                 56759 Kalenborn<br>
-                Deutschland</p>
-                <p><strong>Kontakt:</strong><br>
-                E-Mail: <a href="mailto:info@muckiglueck.de">info@muckiglueck.de</a></p>
-                <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</strong><br>
-                Sophie Ickert / muckiglück, Auf der Lehmkaul 12, 56759 Kalenborn, Deutschland</p>
+                Deutschland
+            </p>
 
-                <h3>Haftungsausschluss</h3>
-                <p>Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+            <h3 style="color: var(--primary-dark); font-size: 1rem; margin-top: 20px;">Kontakt</h3>
+            <p>
+                E-Mail: <a href="mailto:info@muckiglueck.de" style="color: var(--primary); text-decoration: none;">info@muckiglueck.de</a>
+            </p>
+
+            <h3 style="color: var(--primary-dark); font-size: 1rem; margin-top: 20px;">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
+            <p>
+                Sophie Ickert<br>
+                Auf der Lehmkaul 12<br>
+                56759 Kalenborn<br>
+                Deutschland
+            </p>
+
+            <div style="background: #eee; padding: 15px; border-radius: 12px; margin-top: 30px;">
+                <h3 style="font-size: 0.9rem; margin-top: 0;">Haftungsausschluss</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">
+                    Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+                </p>
             </div>
-        </section>
+        </article>
     </main>
 
-    <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2025 muckiglück</p>
-            <div class="footer-links">
-                <a href="impressum.html">Impressum</a>
-                <a href="datenschutz.html">Datenschutz</a>
-                <a href="qualifikation.html">Qualifikation</a>
-            </div>
-        </div>
-    </footer>
-    
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="index.html#services" class="nav-item">
+            <i data-lucide="heart-handshake"></i>
+            <span>Angebot</span>
+        </a>
+        <a href="index.html#contact" class="nav-item">
+            <i data-lucide="mail"></i>
+            <span>Kontakt</span>
+        </a>
+    </nav>
+
+    <script>
+        // Icons initialisieren
+        lucide.createIcons();
+    </script>
 </body>
 </html>

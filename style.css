@@ -1,540 +1,154 @@
-/* =========================================
-   1. Variablen & Globale Einstellungen
-   ========================================= */
-:root {
-    --primary-color: #8A9A5B;
-    --primary-dark: #6e7c47;
-    --accent-color: #C04000;
-    --text-color: #333333;
-    --text-light: #666666;
-    /* Hintergrundfarben angepasst für Transparenz */
-    --bg-overlay-light: rgba(255, 255, 255, 0.85); /* 85% deckendes Weiß */
-    --bg-overlay-dark: rgba(44, 62, 44, 0.9);      /* 90% deckendes Dunkelgrün */
-    --white: #ffffff;
-    --shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Schatten etwas weicher für Tiefe */
-    --radius: 12px;
-    --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
+        /* --- MOBILE FIRST CSS --- */
+        :root {
+            --primary: #8A9A5B; /* Dein Salbei-Grün */
+            --primary-dark: #6e7d46;
+            --bg: #f8f9fa;
+            --surface: #ffffff;
+            --text: #333333;
+            --text-muted: #666666;
+            --border-radius: 16px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --nav-height: 80px; /* Platz für die untere Leiste */
+        }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: var(--font-main);
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: #f0f4f0;
-    
-    /* Hintergrundbild Konfiguration */
-    background-image: url('images/Background.png');
-    
-    /* Sorgt dafür, dass das Bild immer den ganzen Bildschirm füllt */
-    background-size: cover; 
-    
-    /* Fixiert das Bild oben in der Mitte, damit Köpfe/Motive sichtbar bleiben */
-    background-position: center top; 
-    
-    /* Verhindert, dass das Bild mitscrollt (sieht auf Mobilgeräten oft besser aus) */
-    background-attachment: fixed; 
-    background-repeat: no-repeat;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.3s ease;
-}
-
-ul {
-    list-style: none;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Container Utility */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Buttons */
-.btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border: none;
-    border-radius: var(--radius);
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    color: var(--white);
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(138, 154, 91, 0.4);
-}
-
-.btn-primary:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-/* Sektions-Titel */
-.section-title {
-    text-align: center;
-    margin-bottom: 40px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.section-title h2 {
-    font-size: 2.5rem;
-    color: var(--primary-dark);
-    margin-bottom: 15px;
-}
-
-/* Standard-Padding für Sektionen */
-section {
-    padding: 80px 0;
-}
-
-/* NEU: Content-Boxen innerhalb der Sektionen
-   Damit der Text lesbar bleibt, geben wir den Containern in den Sektionen
-   einen semi-transparenten Hintergrund. */
-section .container {
-    background-color: var(--bg-overlay-light);
-    padding: 40px; /* Innenabstand für den Text zur Box-Kante */
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    /* Optional: Ein leichter Weichzeichner-Effekt für den Hintergrund der Box (modern!) */
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-
-/* =========================================
-   2. Loading Overlay
-   ========================================= */
-.loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Das Overlay muss massiv sein, um das Laden zu verdecken */
-    background-color: var(--white);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s ease, visibility 0.5s;
-}
-
-.loading-overlay.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loading-overlay .logo {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
-
-/* =========================================
-   3. Header & Navigation
-   ========================================= */
-.main-header {
-    /* Semi-transparenter Header */
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    padding: 15px 0;
-    backdrop-filter: blur(10px); /* Milchglas-Effekt für den Header */
-    -webkit-backdrop-filter: blur(10px);
-}
-
-.main-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* Header Container braucht keinen eigenen Hintergrund */
-    background-color: transparent;
-    padding: 0 20px;
-    box-shadow: none;
-    backdrop-filter: none;
-}
-
-.main-nav ul {
-    display: flex;
-    gap: 30px;
-}
-
-.main-nav a {
-    font-weight: 500;
-    color: var(--text-color);
-}
-
-.main-nav a:hover {
-    color: var(--primary-color);
-}
-
-/* User Info Bereich */
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 0.9rem;
-}
-
-.logout-btn {
-    color: var(--accent-color);
-    font-weight: bold;
-    border: 1px solid var(--accent-color);
-    padding: 5px 15px;
-    border-radius: 20px;
-}
-
-.logout-btn:hover {
-    background-color: var(--accent-color);
-    color: var(--white);
-}
-
-.mobile-nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-/* =========================================
-   4. Hero Sektion
-   ========================================= */
-.hero {
-    /* vh steht für Viewport Height. 100vh = 100% der Bildschirmhöhe */
-    height: 100vh; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    
-    /* Falls du doch Text im Hero hast, stelle sicher, dass er weiß ist */
-    color: var(--white);
-    text-align: center;
-}
-
-/* Wir sorgen dafür, dass im Hero-Bereich keine Box den Hintergrund verdeckt */
-.hero .container {
-    background-color: transparent !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    border: none !important;
-}
-
-/* =========================================
-   5. Über Mich (Der erste inhaltliche Container)
-   ========================================= */
-#about {
-    /* Wir geben der Sektion etwas Abstand nach oben, 
-       damit sie nicht zu abrupt am unteren Rand des Heros klebt */
-    padding-top: 50px;
-    background-color: transparent;
-}
-
-/* =========================================
-   5. Über Mich (About)
-   ========================================= */
-/* Massive Hintergrundfarbe entfernt */
-#about { background-color: transparent; }
-
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-}
-
-.about-image img {
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    width: 100%;
-    object-fit: cover;
-    height: 100%;
-}
-
-.about-text p {
-    margin-bottom: 20px;
-    font-size: 1.1rem;
-    color: var(--text-light);
-}
-
-/* =========================================
-   6. Dienstleistungen (Services)
-   ========================================= */
-/* Massive Hintergrundfarbe entfernt */
-#services { background-color: transparent; }
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.service-card {
-    /* Die Karten brauchen einen massiveren Hintergrund als die Container,
-       um sich abzuheben. Fast weiß. */
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-.service-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    background-color: #ddd;
-}
-
-.service-card-content {
-    padding: 25px;
-    flex-grow: 1;
-}
-
-.service-card h3 {
-    color: var(--primary-dark);
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-}
-
-.sub-title {
-    display: block;       /* Erzeugt den Zeilenumbruch */
-    font-size: 1.4rem;   /* Macht den Zusatz etwas kleiner (optional) */
-    font-weight: normal;  /* Weniger fett als die Hauptüberschrift */
-    margin-top: 2px;      /* Hier kannst du den Abstand exakt steuern */
-    color: var(--primary-dark); /* Etwas dezentere Farbe */
-}
-
-.service-card p {
-    color: var(--text-light);
-    font-size: 0.95rem;
-    margin-bottom: 10px;
-}
-
-/* =========================================
-   7. Kontakt Sektion
-   ========================================= */
-/* Massive Hintergrundfarbe entfernt */
-#contact { background-color: transparent; }
-
-.contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 15px;
-    /* Inputs etwas transparenter machen */
-    border: 1px solid rgba(0,0,0,0.1);
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: var(--radius);
-    font-family: inherit;
-    font-size: 1rem;
-    transition: all 0.3s;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    background-color: var(--white);
-}
-
-.privacy-consent {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 0.9rem;
-    color: var(--text-light);
-}
-
-.privacy-consent input {
-    width: auto;
-    margin-top: 5px;
-}
-
-.privacy-consent a {
-    color: var(--primary-color);
-    text-decoration: underline;
-}
-
-/* =========================================
-   8. Footer
-   ========================================= */
-.main-footer {
-    /* Semi-transparenter dunkler Hintergrund */
-    background-color: var(--bg-overlay-dark);
-    color: rgba(255, 255, 255, 0.9);
-    padding: 40px 0;
-    text-align: center;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.footer-links {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-}
-
-.footer-links a:hover {
-    color: var(--white);
-}
-
-/* =========================================
-   9. Responsive Design (Mobile)
-   ========================================= */
-@media (max-width: 768px) {
-    section {
-        padding: 60px 0;
-    }
-    /* Auf kleinen Bildschirmen etwas weniger Padding in den Boxen */
-    section .container {
-        padding: 30px 20px;
-    }
-
-    .mobile-nav-toggle {
-        display: block;
-        z-index: 101;
-    }
-
-    .main-nav {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%; /* Volle Breite auf Mobile */
-        height: auto;
-        background: rgba(255, 255, 255, 0.98);
-        padding: 80px 20px 40px 20px; /* Mehr Platz oben wegen dem Header */
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        /* Versteckt das Menü standardmäßig oben außerhalb des Bildschirms */
-        transform: translateY(-100%); 
-        transition: transform 0.4s ease-in-out;
-        z-index: 90;
-        display: block; /* Sicherstellen, dass es kein Flex-Container für die Liste ist */
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            padding-bottom: var(--nav-height); /* Wichtig damit Inhalt nicht verdeckt wird */
+        }
 
-    .main-nav.active {
-        transform: translateY(0);
-    }
+        /* App Header (Oben) */
+        .app-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
 
-/* DIE ENTSCHEIDENDE ÄNDERUNG: Die Liste der Menüpunkte */
-body {
-        background-image: none !important;
-        background-color: #f0f4f0; 
-    }
+        .logo { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0; letter-spacing: -0.5px; }
+        .user-badge { font-size: 0.75rem; background: #eee; padding: 4px 10px; border-radius: 20px; color: var(--text-muted); }
 
-    /* Das neue Element wird fest am Bildschirm "angeklebt" */
-    .mobile-bg-fix {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-image: url('images/Background-mobile.png');
-        background-size: cover;
-        background-position: center top;
-        background-repeat: no-repeat;
-        z-index: -1; /* Schiebt das Bild hinter den Text */
-        will-change: transform; /* Optimiert die Performance beim Scrollen */
-    }
+        /* Container */
+        .container { padding: 0 20px; }
 
-    .main-nav ul {
-        display: flex;
-        flex-direction: column; /* Menüpunkte untereinander */
-        align-items: center;    /* Mittig ausrichten */
-        gap: 25px;              /* Abstand zwischen den Punkten */
-        padding: 0;
-    }
+        /* Hero */
+        .hero {
+            background: var(--primary);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .hero h2 { margin: 0 0 10px 0; }
+        .hero p { margin: 0; opacity: 0.9; }
 
-    .main-nav ul li a {
-        font-size: 1.2rem;      /* Etwas größere Schrift für bessere Tippbarkeit */
-        display: block;
-        width: 100%;
-        text-align: center;
-    }
+        /* Karten Design (Services) */
+        .services-grid { display: grid; gap: 20px; }
+        
+        .service-card {
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+        
+        .service-card:active { transform: scale(0.98); } /* Klick-Feedback */
 
-    .user-info {
-        display: none;
-    }
+        .service-card img { width: 100%; height: 180px; object-fit: cover; }
+        
+        .service-card-content { padding: 20px; }
+        .service-card h3 { margin: 0 0 8px 0; color: var(--primary-dark); font-size: 1.1rem; }
+        .service-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+        .sub-title { font-size: 0.8em; color: var(--primary); }
 
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
+        /* Über Mich */
+        .about-grid { display: flex; flex-direction: column; gap: 15px; }
+        .about-image img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid white; box-shadow: var(--shadow); }
+        .about-header { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
 
-    .about-image {
-        order: -1;
-    }
+        /* Formulare (Touch-Optimiert) */
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 16px; /* Verhindert Zoom auf iPhone */
+            margin-bottom: 15px;
+            background: white;
+            font-family: inherit;
+        }
 
-    .section-title h2 {
-        font-size: 2rem;
-    }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(138, 154, 91, 0.2);
+        }
 
-.hero {
-        /* Der Hero-Bereich ist jetzt komplett durchsichtig */
-        height: 100vh;
-        background: transparent !important;
-    }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn:disabled { background: #ccc; }
 
-    /* Deine Inhalts-Boxen schieben sich nun darüber */
-    section .container {
-        margin-bottom: 20px; /* Kleiner Abstand zwischen den Boxen */
-    }
-}
+        /* --- BOTTOM NAVIGATION (APP BAR) --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0 25px 0; /* Mehr Padding unten für iPhone Home Bar */
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+            z-index: 2000;
+            border-top: 1px solid #f0f0f0;
+        }
 
-@media (min-width: 769px) {
-    .mobile-bg-fix {
-        display: none;
-    }
-}
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #999;
+            font-size: 0.7rem;
+            gap: 4px;
+            width: 25%;
+        }
+
+        .nav-item.active { color: var(--primary); font-weight: 600; }
+        .nav-item i { width: 24px; height: 24px; }
+
+        /* Lade-Screen */
+        .loading-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg); display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999;
+        }
+        .loading-overlay.hidden { display: none; }
+
+        /* Hilfsklassen */
+        .section-title h2 { font-size: 1.3rem; margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 10px; }
+        .privacy-consent { font-size: 0.8rem; display: flex; gap: 10px; margin-bottom: 15px; align-items: flex-start; }

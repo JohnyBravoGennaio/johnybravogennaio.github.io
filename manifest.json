@@ -1,0 +1,28 @@
+{
+  "short_name": "muckiglück",
+  "name": "muckiglück | Familienbegleitung",
+  "description": "Individuelle Begleitung für deinen Familienalltag: Schlaf, Stillen & Beikost.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#8A9A5B",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "images/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "images/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "images/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}
