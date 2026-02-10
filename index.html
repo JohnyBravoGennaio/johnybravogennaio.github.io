@@ -38,13 +38,7 @@
             <div id="user-email" class="user-badge">Gast</div>
         </header>
 
-        <main>
-            <div id="install-container" style="display: none; padding: 20px; text-align: center;">
-                <button id="btn-install" class="btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <i data-lucide="download-cloud"></i>
-                    muckiglück App installieren
-                </button>
-            </div>           
+        <main>      
             <section class="hero">
                 <h2>Herzlich Willkommen bei muckiglueck</h2>
                 <p>Deine Begleitung für den Familienalltag</p>
@@ -57,12 +51,13 @@
                     </div>
                     <div>
                         <h3 style="margin:0;">Sophie</h3>
-                        <p style="margin:0; font-size: 0.9rem; color: #666;">Familienbegleiterin</p>
+                        <p style="margin:0; font-size: 0.9rem; color: #666;">Zertifizierte Schlaf-, Beikost-, und Stillberaterin</p>
                     </div>
                 </div>
                 <p style="font-size: 0.95rem; line-height: 1.6;">
-                    Mit viel Empathie und Fachwissen unterstütze ich euch dabei, euren ganz eigenen Weg als Familie zu finden.
-                </p>
+                    Als Mutter weiß ich, dass der Familienalltag wunderschön, aber auch herausfordernd sein kann. Mit "muckiglück" habe ich es mir zur Aufgabe gemacht, Familien in den verschiedensten Phasen zu unterstützen.
+                    Meine Qualifikationen in der Familienbegleitung und diversen Beratungsbereichen ermöglichen es mir, euch fundiertes Wissen und praktische Hilfe an die Hand zu geben – immer auf Augenhöhe, ohne Druck und mit viel Empathie. Mein Ziel ist es, euch zu bestärken, euren eigenen, individuellen Weg zu finden, der sich für euch als Familie richtig anfühlt.
+                </p>                
             </section>
 
             <section id="services" class="container">
@@ -130,6 +125,32 @@
                 </div>
                 <button onclick="showInstructions()" class="install-btn">Anleitung</button>
                 <button onclick="document.getElementById('install-banner').style.display='none'" class="close-x">✕</button>
+            </div>
+        </div>
+
+        <button id="install-fab" class="install-fab">
+            <i data-lucide="download"></i>
+            <span>App installieren</span>
+        </button>
+
+        <div id="ios-modal" class="ios-modal" onclick="closeIosModal(event)">
+            <div class="ios-modal-content" onclick="event.stopPropagation()"> <div style="width: 40px; height: 5px; background: #ddd; border-radius: 10px; margin: 0 auto 20px auto;"></div>
+                
+                <img src="images/icon-192.png" alt="App Icon" style="width: 60px; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0;">muckiglück installieren</h3>
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 25px;">Installiere die App in 2 einfachen Schritten:</p>
+
+                <div class="ios-step">
+                    <div class="ios-icon-box"><i data-lucide="share" style="color: #007AFF;"></i></div>
+                    <div>1. Tippe unten auf <strong>Teilen</strong></div>
+                </div>
+
+                <div class="ios-step">
+                    <div class="ios-icon-box"><i data-lucide="plus-square" style="color: #333;"></i></div>
+                    <div>2. Wähle <strong>Zum Home-Bildschirm</strong></div>
+                </div>
+
+                <button onclick="closeIosModal()" style="width: 100%; padding: 15px; background: #eee; border: none; border-radius: 12px; font-weight: bold; margin-top: 10px;">Verstanden</button>
             </div>
         </div>
 
@@ -245,69 +266,91 @@
         }
     </script>
     <script>
-        // 1. Variable für Android-Installation (NUR EINMAL deklarieren)
-        let deferredPrompt; 
+        // --- KONFIGURATION ---
+        let deferredPrompt; // Speichert das Android-Event
+        const installBtn = document.getElementById('install-fab');
+        const iosModal = document.getElementById('ios-modal');
 
-        // 2. Weichenstellung: Ist es ein iOS-Gerät?
+        // Helfer: Ist es ein iOS Gerät?
         const isIos = () => {
             const userAgent = window.navigator.userAgent.toLowerCase();
             return /iphone|ipad|ipod/.test(userAgent);
         };
 
-        const isInStandaloneMode = () => 
-            ('standalone' in window.navigator) && (window.navigator.standalone);
+        // Helfer: Ist die App schon installiert (Standalone)?
+        const isInstalled = () => {
+            return (window.navigator.standalone === true) || (window.matchMedia('(display-mode: standalone)').matches);
+        };
 
-        // 3. Logik beim Laden der Seite
+        // --- HAUPTLOGIK ---
+        
+        // 1. Logik beim Laden der Seite
         window.addEventListener('load', () => {
-            const installContainer = document.getElementById('install-container');
+            // Wenn bereits installiert -> Button gar nicht erst zeigen
+            if (isInstalled()) return;
 
-            if (isIos() && !isInStandaloneMode()) {
-                // SPEZIAL-HINWEIS FÜR iPHONE
-                if (installContainer) {
-                    installContainer.innerHTML = `
-                        <div style="background: #fdf6e3; padding: 15px; border: 1px solid #eee8d5; border-radius: 15px; font-size: 0.9rem; text-align: left;">
-                            <p style="margin: 0; color: #555;">
-                                <strong>App installieren:</strong> Tippe unten auf das 
-                                <strong>Teilen-Symbol</strong> (Quadrat mit Pfeil) 
-                                und wähle <strong>'Zum Home-Bildschirm'</strong>.
-                            </p>
-                        </div>
-                    `;
-                    installContainer.style.display = 'block';
-                    if(window.lucide) lucide.createIcons();
-                }
+            // IPHONE CHECK: Zeige Button sofort an
+            if (isIos()) {
+                showInstallButton('App installieren'); // Text für iOS
+                
+                // Klick-Event für iPhone -> Modal öffnen
+                installBtn.addEventListener('click', () => {
+                    iosModal.style.display = 'flex';
+                    lucide.createIcons(); // Icons im Modal laden
+                });
             }
         });
 
-        // 4. ANDROID LOGIK (beforeinstallprompt)
+        // 2. ANDROID CHECK: Wartet auf das Browser-Signal
         window.addEventListener('beforeinstallprompt', (e) => {
+            // Chrome daran hindern, den Standard-Banner zu zeigen
             e.preventDefault();
             deferredPrompt = e;
-            const installContainer = document.getElementById('install-container');
-            if (installContainer && !isIos()) {
-                installContainer.style.display = 'block';
+
+            // Button anzeigen (nur wenn nicht iOS, um Doppelung zu vermeiden)
+            if (!isIos()) {
+                showInstallButton('App installieren'); // Text für Android
+                
+                // Klick-Event für Android -> Installation starten
+                installBtn.addEventListener('click', async () => {
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        const { outcome } = await deferredPrompt.userChoice;
+                        console.log(`Installation: ${outcome}`);
+                        deferredPrompt = null;
+                        // Button ausblenden nach Erfolg
+                        if (outcome === 'accepted') {
+                            installBtn.style.display = 'none';
+                        }
+                    }
+                });
             }
         });
 
-        // 5. Button-Klick für Android
-        const btnInstall = document.getElementById('btn-install');
-        if (btnInstall) {
-            btnInstall.addEventListener('click', async () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    const { outcome } = await deferredPrompt.userChoice;
-                    console.log(`Installation: ${outcome}`);
-                    deferredPrompt = null;
-                    document.getElementById('install-container').style.display = 'none';
-                }
-            });
+        // --- UI FUNKTIONEN ---
+
+        function showInstallButton(text) {
+            if (installBtn) {
+                installBtn.style.display = 'flex';
+                // Optional: Text ändern
+                const span = installBtn.querySelector('span');
+                if(span) span.textContent = text;
+                lucide.createIcons();
+            }
         }
 
-        // Navigation & UI Funktionen
-        function setActive(element) {
+        // Schließt das iOS Modal (auch beim Klick auf den Hintergrund)
+        window.closeIosModal = function(event) {
+            if (!event || event.target.id === 'ios-modal' || !event.target.closest('.ios-modal-content')) {
+                iosModal.style.display = 'none';
+            }
+        }
+
+        // Navigation Active State (Dein alter Code)
+        window.setActive = function(element) {
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
-            if(window.lucide) lucide.createIcons();
+            lucide.createIcons();
         }
     </script>
 </body>
