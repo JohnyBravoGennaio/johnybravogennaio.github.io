@@ -28,7 +28,7 @@
             top: 0;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 15px 20px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -141,11 +141,126 @@
         .nav-item.active { color: var(--primary); font-weight: 600; }
         .nav-item i { width: 24px; height: 24px; }
 
+        .install-banner {
+        position: fixed;
+        bottom: 90px; /* Über der Bottom-Nav */
+        left: 20px;
+        right: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        z-index: 3000;
+        border: 1px solid var(--primary);
+        }
+
+        .install-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .install-content img {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+        }
+
+        .install-text strong {
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .install-text p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .install-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .close-x {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
         /* Lade-Screen */
         .loading-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg); display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 9999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+
+        .loading-wrapper {
+            text-align: center;
+        }
+
+        .loading-logo {
+            width: 120px; /* Perfekte Größe für Handys */
+            height: 120px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        .logo-text {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .loading-subtext {
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Sanftes Pulsieren des Logos */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Drei kleine Lade-Punkte */
+        .loader-dots span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 0 4px;
+            animation: dots 1.4s infinite both;
+        }
+
+        .loader-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .loader-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dots {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
         }
         .loading-overlay.hidden { display: none; }
 

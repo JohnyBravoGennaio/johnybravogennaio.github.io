@@ -8,8 +8,10 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#8A9A5B">
     <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <meta name="apple-mobile-web-app-title" content="muckiglück">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
@@ -17,20 +19,34 @@
 <body>
 
     <div class="loading-overlay" id="loading-overlay">
-        <h1 class="logo" style="font-size: 2rem;">muckiglück</h1>
-        <p style="color: #999;">App wird geladen...</p>
+        <div class="loading-wrapper">
+            <img src="images/icon-512.png" alt="muckiglück Logo" class="loading-logo">
+            <h1 class="logo-text">muckiglück</h1>
+            <div class="loader-dots">
+                <span></span><span></span><span></span>
+            </div>
+            <p class="loading-subtext">Seite wird geladen...</p>
+        </div>
     </div>
 
     <div id="main-content" style="display: none;">
         
         <header class="app-header">
-            <div class="logo">muckiglück</div>
+            <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
+                <img src="images/icon-192.png" alt="muckiglück Logo" style="height: 35px; width: 35px; border-radius: 8px; object-fit: cover;">
+            </div>
             <div id="user-email" class="user-badge">Gast</div>
         </header>
 
         <main>
+            <div id="install-container" style="display: none; padding: 20px; text-align: center;">
+                <button id="btn-install" class="btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <i data-lucide="download-cloud"></i>
+                    muckiglück App installieren
+                </button>
+            </div>           
             <section class="hero">
-                <h2>Willkommen Sophie</h2>
+                <h2>Herzlich Willkommen bei muckiglueck</h2>
                 <p>Deine Begleitung für den Familienalltag</p>
             </section>
 
@@ -54,18 +70,10 @@
                 
                 <div class="services-grid">
                     <div class="service-card">
-                        <img src="images/Familienbegleitung.jpg" alt="Familie">
-                        <div class="service-card-content">
-                            <h3>Familienbegleitung</h3>
-                            <p>Vom Schwangerschaftstest bis ins Kleinkindalter.</p>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
                         <img src="images/Schlafberatung.jpg" alt="Schlaf">
                         <div class="service-card-content">
                             <h3>Schlafberatung</h3>
-                            <p>Sanfte Wege zu ruhigeren Nächten für alle.</p>
+                            <p>Schlaf ist ein wichtiges Thema für die ganze Familie - und manchmal eine echte Herausforderung. In der Schlafberatung schauen wir gemeinsam auf Eure individuelle Situation, Bedürfnisse und Möglichkeiten.</p>
                         </div>
                     </div>
 
@@ -73,7 +81,7 @@
                         <img src="images/Beikost.jpg" alt="Beikost">
                         <div class="service-card-content">
                             <h3>Beikost <span class="sub-title">(auch vegan)</span></h3>
-                            <p>Stressfreier Start am Familientisch.</p>
+                            <p>Wann ist der richtige Zeitpunkt? Wie beginne ich am besten? Was passt zu meinem Kind und zu unserem Alltag? In der Beratung erhältst du fundierte Informationen rund um das Thema Beikost.</p>
                         </div>
                     </div>
 
@@ -81,7 +89,15 @@
                         <img src="images/Stillberatung.jpg" alt="Stillen">
                         <div class="service-card-content">
                             <h3>Stillberatung</h3>
-                            <p>Für eine harmonische Stillbeziehung.</p>
+                            <p>Individuelle Stillberatung von Stillvorbereitung, Problemen während der Stillzeit bis hin zum bedürfnisorientiertem Abstillen. Für einen guten Start und eine harmonische Stillbeziehung.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <img src="images/Workshops.jpg" alt="Workshops">
+                        <div class="service-card-content">
+                            <h3>Workshops & Vorträge</h3>
+                            <p>In meinen Workshops teile ich mein Wissen zu verschiedenen Familienthemen. Eine tolle Möglichkeit, sich zu informieren und mit anderen Eltern auszutauschen.</p>
                         </div>
                     </div>
                 </div>
@@ -104,6 +120,18 @@
                 <div id="contact-status" style="margin-top: 15px; text-align: center; font-weight: bold;"></div>
             </section>
         </main>
+
+        <div id="install-banner" class="install-banner" style="display: none;">
+            <div class="install-content">
+                <img src="images/icon-192.png" alt="Logo">
+                <div class="install-text">
+                    <strong>muckiglück als App?</strong>
+                    <p>Für schnellen Zugriff zum Home-Bildschirm hinzufügen.</p>
+                </div>
+                <button onclick="showInstructions()" class="install-btn">Anleitung</button>
+                <button onclick="document.getElementById('install-banner').style.display='none'" class="close-x">✕</button>
+            </div>
+        </div>
 
         <nav class="bottom-nav">
             <a href="#" class="nav-item active" onclick="setActive(this)">
@@ -214,6 +242,72 @@
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
             lucide.createIcons(); // Icons neu rendern falls nötig
+        }
+    </script>
+    <script>
+        // 1. Variable für Android-Installation (NUR EINMAL deklarieren)
+        let deferredPrompt; 
+
+        // 2. Weichenstellung: Ist es ein iOS-Gerät?
+        const isIos = () => {
+            const userAgent = window.navigator.userAgent.toLowerCase();
+            return /iphone|ipad|ipod/.test(userAgent);
+        };
+
+        const isInStandaloneMode = () => 
+            ('standalone' in window.navigator) && (window.navigator.standalone);
+
+        // 3. Logik beim Laden der Seite
+        window.addEventListener('load', () => {
+            const installContainer = document.getElementById('install-container');
+
+            if (isIos() && !isInStandaloneMode()) {
+                // SPEZIAL-HINWEIS FÜR iPHONE
+                if (installContainer) {
+                    installContainer.innerHTML = `
+                        <div style="background: #fdf6e3; padding: 15px; border: 1px solid #eee8d5; border-radius: 15px; font-size: 0.9rem; text-align: left;">
+                            <p style="margin: 0; color: #555;">
+                                <strong>App installieren:</strong> Tippe unten auf das 
+                                <strong>Teilen-Symbol</strong> (Quadrat mit Pfeil) 
+                                und wähle <strong>'Zum Home-Bildschirm'</strong>.
+                            </p>
+                        </div>
+                    `;
+                    installContainer.style.display = 'block';
+                    if(window.lucide) lucide.createIcons();
+                }
+            }
+        });
+
+        // 4. ANDROID LOGIK (beforeinstallprompt)
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const installContainer = document.getElementById('install-container');
+            if (installContainer && !isIos()) {
+                installContainer.style.display = 'block';
+            }
+        });
+
+        // 5. Button-Klick für Android
+        const btnInstall = document.getElementById('btn-install');
+        if (btnInstall) {
+            btnInstall.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log(`Installation: ${outcome}`);
+                    deferredPrompt = null;
+                    document.getElementById('install-container').style.display = 'none';
+                }
+            });
+        }
+
+        // Navigation & UI Funktionen
+        function setActive(element) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            if(window.lucide) lucide.createIcons();
         }
     </script>
 </body>
