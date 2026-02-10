@@ -3,51 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>muckiglück | Qualifikation</title>
+    <title>Qualifikationen | muckiglück</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Spezielles Raster für Zertifikate */
+        .cert-grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 20px; }
+        .cert-card { background: white; border-radius: 16px; padding: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow: hidden; }
+        .cert-card img { width: 100%; height: auto; display: block; }
+        .cert-info { padding: 15px; }
+        .cert-info h3 { margin: 0 0 5px 0; color: var(--primary); font-size: 1.1rem; }
+        .cert-info p { margin: 0; color: #666; font-size: 0.9rem; }
+    </style>
 </head>
 <body>
 
     <header class="app-header">
-        <div class="logo">muckiglück</div>
-        <a href="index.html" style="color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Zurück</a>
+        <a href="index.html" style="color: var(--text); display: flex; align-items: center; text-decoration: none;">
+            <i data-lucide="arrow-left"></i>
+        </a>
+        <div class="logo">Qualifikationen</div>
+        <div style="width: 24px;"></div>
     </header>
 
-    <main class="container" style="margin-top: 20px; padding-bottom: 40px;">
-        <section class="section-title">
-            <h2>Qualifikationen</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">
-                Fundiertes Wissen für eine liebevolle Begleitung.
-            </p>
-        </section>
+    <main style="padding-bottom: 40px;">
+        <div class="cert-grid">
+            
+            <div class="cert-card">
+                <img src="images/qualifikation.jpg" alt="Qualifikationsnachweise">
+                <div class="cert-info">
+                    <h3>Qualität und aktuelles Fachwissen sind mir wichtig.</h3>
+                    <p>Hier siehst du eine Übersicht meiner Zertifizierungen in den Bereichen Familienbegleitung, Schlafberatung und Stillen.</p>
+                </div>
+            </div>
 
-        <div style="background: white; padding: 10px; border-radius: 20px; box-shadow: var(--shadow); margin-top: 20px;">
-            <img src="images/qualifikation.jpg" alt="Qualifikationsnachweise" 
-                 style="width: 100%; height: auto; border-radius: 12px; display: block;">
-        </div>
-
-        <div style="margin-top: 25px; line-height: 1.6; color: var(--text);">
-            <p>
-                Qualität und aktuelles Fachwissen sind mir wichtig. Hier siehst du eine Übersicht meiner Zertifizierungen in den Bereichen Familienbegleitung, Schlafberatung und Stillen.
-            </p>
         </div>
     </main>
-
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i data-lucide="home"></i>
-            <span>Home</span>
-        </a>
-        <a href="index.html#services" class="nav-item">
-            <i data-lucide="heart-handshake"></i>
-            <span>Angebot</span>
-        </a>
-        <a href="index.html#contact" class="nav-item">
-            <i data-lucide="mail"></i>
-            <span>Kontakt</span>
-        </a>
-    </nav>
 
     <script>
         lucide.createIcons();

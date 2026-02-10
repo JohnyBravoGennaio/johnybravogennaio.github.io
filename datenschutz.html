@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>muckiglück | Datenschutz</title>
+    <title>Impressum | muckiglück</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
 
     <header class="app-header">
-        <div class="logo">muckiglück</div>
-        <a href="index.html" style="color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Zurück</a>
+        <a href="index.html" style="color: var(--text); display: flex; align-items: center; text-decoration: none;">
+            <i data-lucide="arrow-left"></i>
+        </a>
+        <div class="logo">Datenschutz</div>
+        <div style="width: 24px;"></div>
     </header>
 
-    <main class="container" style="margin-top: 20px; padding-bottom: 40px;">
+    <main class="container" style="margin-top: 20px; padding-bottom: 40px; font-size: 0.9rem; line-height: 1.6;">
         <section class="section-title">
             <h2>Datenschutzerklärung</h2>
         </section>
@@ -46,21 +49,6 @@
             <p style="margin-top: 30px; font-style: italic;">Stand: Februar 2026</p>
         </div>
     </main>
-
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i data-lucide="home"></i>
-            <span>Home</span>
-        </a>
-        <a href="index.html#services" class="nav-item">
-            <i data-lucide="heart-handshake"></i>
-            <span>Angebot</span>
-        </a>
-        <a href="index.html#contact" class="nav-item">
-            <i data-lucide="mail"></i>
-            <span>Kontakt</span>
-        </a>
-    </nav>
 
     <script>
         lucide.createIcons();
