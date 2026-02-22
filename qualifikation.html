@@ -40,6 +40,23 @@
         </div>
     </main>
 
+    <div id="zoom-overlay" class="zoom-overlay" onclick="this.style.display='none'">
+        <img id="zoomed-img" src="" alt="Vergrößerte Ansicht">
+    </div>
+
+    <script>
+        // Funktion zum Zoomen
+        document.querySelectorAll('.cert-card img, .service-card img').forEach(img => {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', () => {
+                const overlay = document.getElementById('zoom-overlay');
+                const zoomedImg = document.getElementById('zoomed-img');
+                zoomedImg.src = img.src;
+                overlay.style.display = 'flex';
+            });
+        });
+    </script>
+
     <script>
         lucide.createIcons();
     </script>

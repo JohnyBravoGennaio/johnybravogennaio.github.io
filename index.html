@@ -35,7 +35,6 @@
             <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
                 <img src="images/icon-192.png" alt="muckiglück Logo" style="height: 35px; width: 35px; border-radius: 8px; object-fit: cover;">
             </div>
-            <div id="user-email" class="user-badge">Gast</div>
         </header>
 
         <main>      
@@ -71,14 +70,7 @@
                         <img src="images/Schlafberatung.jpg" alt="Schlaf">
                         <div class="service-card-content">
                             <h3>Schlafberatung</h3>
-                            <p class="price-tag">35,00 € / Stunde</p>
                             <p>Schlaf ist ein wichtiges Thema für die ganze Familie - und manchmal eine echte Herausforderung. In der Schlafberatung schauen wir gemeinsam auf Eure individuelle Situation, Bedürfnisse und Möglichkeiten.</p>
-                            <button 
-                                data-cal-link="muckigluck/schlafberatung"
-                                data-cal-config='{"layout":"month_view"}'
-                                class="btn btn-primary booking-btn">
-                                Termin buchen
-                            </button>
                         </div>
                     </div>
 
@@ -185,54 +177,10 @@
                 <i data-lucide="mail"></i>
                 <span>Kontakt</span>
             </a>
-            <a href="#" id="logout-btn" class="nav-item">
-                <i data-lucide="log-out"></i>
-                <span>Logout</span>
-            </a>
         </nav>
     </div>
-
+    
     <script type="module">
-        // Firebase Konfiguration (DEINE DATEN)
-        const firebaseConfig = {
-            apiKey: "AIzaSyAlDyv4LGkYFzDWwVwVTpfyxEmpROz115o",
-            authDomain: "muckiglueckauth.firebaseapp.com",
-            projectId: "muckiglueckauth",
-            storageBucket: "muckiglueckauth.firebasestorage.app",
-            messagingSenderId: "550834074850",
-            appId: "1:550834074850:web:e83a073d702b1fd9e09abb"
-        };
-
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        // Elemente
-        const loadingOverlay = document.getElementById('loading-overlay');
-        const mainContent = document.getElementById('main-content');
-        const userEmailSpan = document.getElementById('user-email');
-        const logoutBtn = document.getElementById('logout-btn');
-
-        // Auth Check
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                userEmailSpan.textContent = user.email.split('@')[0]; // Zeigt nur Namen vor dem @
-                loadingOverlay.classList.add('hidden');
-                mainContent.style.display = 'block';
-                lucide.createIcons();
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
-
-        // Logout
-        logoutBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            signOut(auth).catch((error) => console.error(error));
-        });
-
         // Checkbox Logik
         const privacyCheckbox = document.getElementById('privacy-check');
         const submitButton = document.getElementById('submit-btn');
@@ -275,7 +223,31 @@
             });
         });
     </script>
-    
+
+    <script>
+        window.addEventListener('load', () => {
+            // Wir setzen einen Timer von 2000 Millisekunden (2 Sekunden)
+            setTimeout(() => {
+                const loadingOverlay = document.getElementById('loading-overlay');
+                const mainContent = document.getElementById('main-content');
+
+                // 1. Ladebildschirm ausblenden
+                if (loadingOverlay) {
+                    loadingOverlay.classList.add('hidden');
+                }
+
+                // 2. Inhalt anzeigen
+                if (mainContent) {
+                    mainContent.style.display = 'block';
+                }
+
+                // 3. Icons initialisieren
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+            }, 500); // 2000ms = 2 Sekunden Mindestwartezeit
+        });
+    </script>   
     <script>
         function setActive(element) {
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
