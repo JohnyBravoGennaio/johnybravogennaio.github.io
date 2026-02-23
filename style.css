@@ -1,6 +1,6 @@
         /* --- MOBILE FIRST CSS --- */
         :root {
-            --primary: #C7CAB1; /* Dein Salbei-Grün */
+            --primary: #8A9A5B; /* Dein Salbei-Grün */
             --primary-dark: #6e7d46;
             --bg: #f8f9fa;
             --surface: #ffffff;
@@ -44,45 +44,39 @@
 
         /* Hero */
         .hero {
+            /* Pfad zum Bild - achte darauf, dass es im Ordner 'images' liegt */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+                            url('images/Background.png'); 
+            
+            background-size: cover;      /* Bild füllt den Bereich aus */
+            background-position: center; /* Bildinhalt wird zentriert */
+            background-repeat: no-repeat;
+            
+            /* Höhe der Sektion */
+            min-height: 350px; 
+            padding: 60px 20px;
+            
+            /* Text-Zentrierung */
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
-            /* WICHTIG: Kein Padding an den Seiten für die Sektion selbst */
-            padding: 0 0 20px 0; 
-        }
-
-        .hero-image {
-            width: 100%; /* Volle Breite */
-            aspect-ratio: 16 / 9; /* Das Bild behält immer dieses Verhältnis bei */
-            border-radius: 0 0 20px 20px; 
-            overflow: hidden;
-            margin-bottom: 25px;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-text {
+            justify-content: center;
             text-align: center;
-            /* Hier geben wir den Seitenabstand für den Text wieder hinzu */
-            padding: 0 20px; 
+            
+            /* Schriftfarbe auf weiß für den Kontrast zum Bild */
+            color: #ffffff; 
         }
 
-        .hero-text h2 {
-            color: #C7CAB1; /* Dein muckiglück-Grün (oder var(--primary) falls du das definiert hast) */
-            font-size: 1.8rem;
-            margin: 0 0 10px 0;
-            line-height: 1.2;
+        .hero h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            /* Text-Schatten macht die Schrift auf Bildern noch lesbarer */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
 
-        .hero-text p {
-            color: #444444; /* Dunkelgrau für perfekte Lesbarkeit auf hellem Hintergrund */
+        .hero p {
             font-size: 1.1rem;
-            margin: 0;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
         }
 
         /* Karten Design (Services) */
@@ -98,20 +92,15 @@
         
         .service-card:active { transform: scale(0.98); } /* Klick-Feedback */
 
-        .service-card img {
-            width: 100%;
-            /* Entferne height: 180px; */
-            aspect-ratio: 4 / 3; /* Etwas quadratischer als das Hero-Bild */
-            object-fit: cover;
-        }
+        .service-card img { width: 100%; height: 180px; object-fit: cover; }
         
         .service-card-content { padding: 20px; }
-        .service-card h3 { margin: 0 0 8px 0; color: var(--primary); font-size: 1.1rem; }
+        .service-card h3 { margin: 0 0 8px 0; color: var(--primary-dark); font-size: 1.1rem; }
         .service-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
         .sub-title { font-size: 0.8em; color: var(--primary); }
 
         .price-tag {
-            color: var(--primary); /* Dein Grün */
+            color: var(--primary-color); /* Dein Grün */
             font-weight: bold;
             font-size: 1.1rem;
             margin-bottom: 10px;
@@ -384,22 +373,3 @@
         /* Hilfsklassen */
         .section-title h2 { font-size: 1.3rem; margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 10px; }
         .privacy-consent { font-size: 0.8rem; display: flex; gap: 10px; margin-bottom: 15px; align-items: flex-start; }
- 
-        /* Das Overlay für das vergrößerte Bild */
-        .zoom-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            cursor: zoom-out;
-        }
-
-        .zoom-overlay img {
-            max-width: 95%;
-            max-height: 95%;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.1);
-        }        

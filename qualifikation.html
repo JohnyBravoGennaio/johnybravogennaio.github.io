@@ -10,12 +10,7 @@
         /* Spezielles Raster für Zertifikate */
         .cert-grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 20px; }
         .cert-card { background: white; border-radius: 16px; padding: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow: hidden; }
-        .cert-card img {
-            width: 100%;
-            aspect-ratio: 1 / 1.41; /* Typisches DIN-A4 Verhältnis für Dokumente */
-            object-fit: contain; /* 'contain' ist besser für Zertifikate, damit nichts abgeschnitten wird */
-            background: #f0f0f0; /* Grauer Hintergrund für leere Ränder bei Dokumenten */
-        }
+        .cert-card img { width: 100%; height: auto; display: block; }
         .cert-info { padding: 15px; }
         .cert-info h3 { margin: 0 0 5px 0; color: var(--primary); font-size: 1.1rem; }
         .cert-info p { margin: 0; color: #666; font-size: 0.9rem; }
@@ -44,23 +39,6 @@
 
         </div>
     </main>
-
-    <div id="zoom-overlay" class="zoom-overlay" onclick="this.style.display='none'">
-        <img id="zoomed-img" src="" alt="Vergrößerte Ansicht">
-    </div>
-
-    <script>
-        // Funktion zum Zoomen
-        document.querySelectorAll('.cert-card img, .service-card img').forEach(img => {
-            img.style.cursor = 'zoom-in';
-            img.addEventListener('click', () => {
-                const overlay = document.getElementById('zoom-overlay');
-                const zoomedImg = document.getElementById('zoomed-img');
-                zoomedImg.src = img.src;
-                overlay.style.display = 'flex';
-            });
-        });
-    </script>
 
     <script>
         lucide.createIcons();
