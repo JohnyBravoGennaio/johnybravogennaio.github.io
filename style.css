@@ -1,6 +1,6 @@
         /* --- MOBILE FIRST CSS --- */
         :root {
-            --primary: #8A9A5B; /* Dein Salbei-Grün */
+            --primary: #C7CAB1; /* Dein Salbei-Grün */
             --primary-dark: #6e7d46;
             --bg: #f8f9fa;
             --surface: #ffffff;
@@ -44,36 +44,36 @@
 
         /* Hero */
         .hero {
-            padding: 15px 20px; /* Abstand links/rechts und nach oben */
             display: flex;
-            flex-direction: column; /* Setzt Bild und Text untereinander */
+            flex-direction: column;
             align-items: center;
+            width: 100%;
+            /* WICHTIG: Kein Padding an den Seiten für die Sektion selbst */
+            padding: 0 0 20px 0; 
         }
 
         .hero-image {
-            width: 100%;
-            max-width: 600px; /* Verhindert, dass das Bild auf großen Bildschirmen riesig wird */
-            height: 250px; /* Höhe des Bildes - kannst du nach Geschmack anpassen */
-            border-radius: 20px; /* Hier ist deine gewünschte Abrundung! */
+            width: 100%; /* Volle Breite */
+            aspect-ratio: 16 / 9; /* Das Bild behält immer dieses Verhältnis bei */
+            border-radius: 0 0 20px 20px; 
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
-            margin-bottom: 25px; /* Abstand zwischen Bild und Text */
+            margin-bottom: 25px;
         }
 
         .hero-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Sorgt dafür, dass das Bild die Box füllt ohne sich zu verzerren */
-            display: block;
+            object-fit: cover;
         }
 
         .hero-text {
             text-align: center;
-            padding: 0 10px;
+            /* Hier geben wir den Seitenabstand für den Text wieder hinzu */
+            padding: 0 20px; 
         }
 
         .hero-text h2 {
-            color: #8A9A5B; /* Dein muckiglück-Grün (oder var(--primary) falls du das definiert hast) */
+            color: #C7CAB1; /* Dein muckiglück-Grün (oder var(--primary) falls du das definiert hast) */
             font-size: 1.8rem;
             margin: 0 0 10px 0;
             line-height: 1.2;
@@ -98,15 +98,20 @@
         
         .service-card:active { transform: scale(0.98); } /* Klick-Feedback */
 
-        .service-card img { width: 100%; height: 180px; object-fit: cover; }
+        .service-card img {
+            width: 100%;
+            /* Entferne height: 180px; */
+            aspect-ratio: 4 / 3; /* Etwas quadratischer als das Hero-Bild */
+            object-fit: cover;
+        }
         
         .service-card-content { padding: 20px; }
-        .service-card h3 { margin: 0 0 8px 0; color: var(--primary-dark); font-size: 1.1rem; }
+        .service-card h3 { margin: 0 0 8px 0; color: var(--primary); font-size: 1.1rem; }
         .service-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
         .sub-title { font-size: 0.8em; color: var(--primary); }
 
         .price-tag {
-            color: var(--primary-color); /* Dein Grün */
+            color: var(--primary); /* Dein Grün */
             font-weight: bold;
             font-size: 1.1rem;
             margin-bottom: 10px;
