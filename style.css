@@ -373,3 +373,50 @@
         /* Hilfsklassen */
         .section-title h2 { font-size: 1.3rem; margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 10px; }
         .privacy-consent { font-size: 0.8rem; display: flex; gap: 10px; margin-bottom: 15px; align-items: flex-start; }
+        
+        /* Styling für das Vergrößerungs-Modal */
+        .image-modal {
+            display: none; 
+            position: fixed;
+            z-index: 2000; /* Höher als die Nav-Bar */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            animation: zoomIn 0.3s ease;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @keyframes zoomIn {
+            from {transform: scale(0.7); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+
+        /* Cursor-Pointer für das Profilbild, damit man sieht, dass es klickbar ist */
+        .about-image img {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.05);
+        }        

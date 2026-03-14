@@ -47,7 +47,7 @@
             <section id="about" class="container" style="margin-bottom: 40px;">
                 <div class="about-header">
                     <div class="about-image">
-                        <img src="images/Sophie.jpg" alt="Sophie">
+                        <img src="images/SophieThumbNail.jpg" alt="Sophie">
                     </div>
                     <div>
                         <h3 style="margin:0;">Sophie</h3>
@@ -275,6 +275,21 @@
                 btn.textContent = 'Absenden';
             });
         });
+        // Logik für die Bildvergrößerung
+        document.addEventListener('DOMContentLoaded', () => {
+            const profileImg = document.querySelector('.about-image img');
+            const modal = document.getElementById('image-modal');
+            const fullImg = document.getElementById('full-image');
+
+            if (profileImg && modal) {
+                profileImg.addEventListener('click', () => {
+                    modal.style.display = 'flex';
+                    // Hier nutzen wir das gleiche Bild. 
+                    // Falls du ein extra großes Bild hast, ersetze 'src' durch den Pfad zum großen Bild.
+                    fullImg.src = 'images/Sophie.jpg';
+                });
+            }
+        });        
     </script>
     
     <script>
@@ -381,5 +396,9 @@
     Cal("ui", {"styles":{"branding":{"brandColor":"#8A9A5B"}},"hideEventTypeDetails":false,"layout":"month_view"});
     </script>
 
+    <div id="image-modal" class="image-modal" onclick="this.style.display='none'">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="full-image">
+    </div>
 </body>
 </html>
