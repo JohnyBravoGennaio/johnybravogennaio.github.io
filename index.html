@@ -382,45 +382,38 @@
         <img class="modal-content" id="full-image">
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    (function() {
+        // Die einzige Funktion, die wir brauchen
+        function handleFABVisibility() {
             const installBtn = document.getElementById('install-fab');
             const anchor = document.getElementById('install-anchor');
 
             if (!installBtn || !anchor) return;
 
-            // Funktion, die entscheidet, ob der Button sichtbar sein soll
-            const checkVisibility = () => {
-                const rect = anchor.getBoundingClientRect();
-                // Wenn die Oberkante des Ankers im Sichtfenster (Viewport) ist
-                if (rect.top <= window.innerHeight) {
-                    installBtn.classList.add('hidden-at-bottom');
-                } else {
-                    installBtn.classList.remove('hidden-at-bottom');
-                }
-            };
+            const rect = anchor.getBoundingClientRect();
+            // Wir blenden aus, sobald die Oberkante des Ankers ins Sichtfeld rückt
+            const isVisible = rect.top > (window.innerHeight - 20); 
 
-            // 1. Überwachung durch Intersection Observer (für Performance)
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        installBtn.classList.add('hidden-at-bottom');
-                    } else {
-                        installBtn.classList.remove('hidden-at-bottom');
-                    }
-                });
-            }, { threshold: 0 });
+            if (isVisible) {
+                installBtn.classList.remove('hidden-at-bottom');
+            } else {
+                installBtn.classList.add('hidden-at-bottom');
+            }
+        }
 
-            observer.observe(anchor);
-
-            // 2. Sicherheits-Check beim Scrollen (hilft nach Navigation/Zurück)
-            window.addEventListener('scroll', checkVisibility, { passive: true });
-
-            // 3. Sofort-Check beim Laden (falls man per Anker direkt unten landet)
-            setTimeout(checkVisibility, 100);
-            
-            // 4. Check wenn man "Zurück" geht (Pageshow Event)
-            window.addEventListener('pageshow', checkVisibility);
+        // Event-Listener für alle Lebenslagen
+        window.addEventListener('scroll', handleFABVisibility, { passive: true });
+        window.addEventListener('resize', handleFABVisibility);
+        window.addEventListener('load', handleFABVisibility);
+        window.addEventListener('pageshow', (e) => {
+            handleFABVisibility();
+            if (window.lucide) lucide.createIcons();
         });
+
+        // Sicherheitshalber nach einer kurzen Verzögerung prüfen
+        setTimeout(handleFABVisibility, 300);
+    })();
     </script>
+
 </body>
 </html>
