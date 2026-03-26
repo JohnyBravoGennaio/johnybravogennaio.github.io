@@ -300,17 +300,7 @@
             transition: transform 0.2s ease, box-shadow 0.2s;
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        /* Der eingerastete Zustand am Ende der Seite */
-        .install-fab.at-bottom {
-            position: relative;
-            bottom: 0;
-            left: 0;
-            transform: translateX(0); /* Zentrierung erfolgt übers Parent-Div */
-            margin: 20px auto; 
-            box-shadow: none;
-            min-width: 200px;
-            animation: none; /* Stoppt das Einfliegen, wenn er fest sitzt */
-        }
+
         .install-fab:active {
             transform: translateX(-50%) scale(0.95);
             box-shadow: 0 2px 10px rgba(138, 154, 91, 0.4);
@@ -542,4 +532,11 @@
 
         .about-image img:hover {
             transform: scale(1.05);
-        }                  
+        }    
+        /* Klasse zum Ausblenden des schwebenden Buttons */
+        .install-fab.hidden-at-bottom {
+            opacity: 0;
+            pointer-events: none; /* Verhindert, dass man den unsichtbaren Button klickt */
+            transform: translateX(-50%) scale(0.8);
+            transition: all 0.3s ease;
+        }                      
