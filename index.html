@@ -386,23 +386,40 @@
             const installBtn = document.getElementById('install-fab');
             const anchor = document.getElementById('install-anchor');
 
-            if (installBtn && anchor) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            // Wenn der Anker sichtbar wird (User ist unten), Button ausblenden
-                            installBtn.classList.add('hidden-at-bottom');
-                        } else {
-                            // Wenn der Anker nicht mehr sichtbar ist, Button wieder zeigen
-                            installBtn.classList.remove('hidden-at-bottom');
-                        }
-                    });
-                }, {
-                    threshold: 0 // Reagiert sofort bei Berührung
-                });
+            if (!installBtn || !anchor) return;
 
-                observer.observe(anchor);
-            }
+            // Funktion, die entscheidet, ob der Button sichtbar sein soll
+            const checkVisibility = () => {
+                const rect = anchor.getBoundingClientRect();
+                // Wenn die Oberkante des Ankers im Sichtfenster (Viewport) ist
+                if (rect.top <= window.innerHeight) {
+                    installBtn.classList.add('hidden-at-bottom');
+                } else {
+                    installBtn.classList.remove('hidden-at-bottom');
+                }
+            };
+
+            // 1. Überwachung durch Intersection Observer (für Performance)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        installBtn.classList.add('hidden-at-bottom');
+                    } else {
+                        installBtn.classList.remove('hidden-at-bottom');
+                    }
+                });
+            }, { threshold: 0 });
+
+            observer.observe(anchor);
+
+            // 2. Sicherheits-Check beim Scrollen (hilft nach Navigation/Zurück)
+            window.addEventListener('scroll', checkVisibility, { passive: true });
+
+            // 3. Sofort-Check beim Laden (falls man per Anker direkt unten landet)
+            setTimeout(checkVisibility, 100);
+            
+            // 4. Check wenn man "Zurück" geht (Pageshow Event)
+            window.addEventListener('pageshow', checkVisibility);
         });
     </script>
 </body>
