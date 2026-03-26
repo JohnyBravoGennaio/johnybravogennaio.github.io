@@ -275,53 +275,40 @@
 
         /* --- NEUER INSTALLATIONS-BUTTON (Floating Action Button) --- */
 
-        /* Der Button im Header (oben rechts) */
+        /* Der schwebende Button über der Navigation */
         .install-fab {
             display: none; /* Wird per JS aktiviert */
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            
-            /* Kompakteres Design für den Header */
+            position: fixed;
+            bottom: 100px; /* Hoch genug, damit er nicht hinter der Nav verschwindet */
+            left: 50%;
+            transform: translateX(-50%);
             width: auto;
-            min-width: 0; 
+            min-width: 220px;
             background-color: var(--primary);
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px; /* Kleinere Pillen-Form */
-            box-shadow: 0 2px 8px rgba(138, 154, 91, 0.2);
-            
-            font-weight: 600;
-            font-size: 0.85rem;
-            z-index: 10;
-            
+            padding: 15px 25px;
+            border-radius: 50px; /* Pillen-Form */
+            box-shadow: 0 4px 20px rgba(138, 154, 91, 0.4); /* Schatten in deiner Farbe */
+            font-weight: 700;
+            font-size: 1rem;
+            z-index: 1900; /* Unter der Nav (2000), aber über dem Content */
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 12px;
             cursor: pointer;
-            transition: transform 0.2s ease, background-color 0.2s;
-            white-space: nowrap;
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .install-fab:active {
-            transform: translateY(-50%) scale(0.95);
+            transform: translateX(-50%) scale(0.95);
+            box-shadow: 0 2px 10px rgba(138, 154, 91, 0.4);
         }
 
         .install-fab i {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Auf sehr schmalen Bildschirmen nur das Icon zeigen, um Platz zu sparen */
-        @media (max-width: 380px) {
-            .install-fab span {
-                display: none;
-            }
-            .install-fab {
-                padding: 8px;
-            }
+            width: 20px;
+            height: 20px;
         }
 
         /* Kleine Animation beim Erscheinen */
