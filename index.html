@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -114,11 +114,15 @@
                     <input type="text" name="from_name" placeholder="Dein Name" required>
                     <input type="text" name="honeypot_field" style="display:none" tabindex="-1" autocomplete="off">
                     <input type="email" name="from_email" placeholder="Deine E-Mail" required>
-                    <textarea name="message" placeholder="Wie kann ich helfen?" rows="5" required></textarea>
+                    <textarea name="message" required maxlength="2000" placeholder="Wie kann ich helfen?" rows="5" required></textarea>
                     
                     <div class="privacy-consent">
                         <input type="checkbox" id="privacy-check" name="privacy-consent" required style="width: auto; margin: 0;">
                         <label for="privacy-check">Ich stimme der <a href="https://www.muckiglueck.de/datenschutz">Datenschutzerklärung</a> zu.</label>
+                    </div>
+
+                    <div class="cf-turnstile"
+                        data-sitekey="0x4AAAAAAEiQ-yFdPt5DybnE">
                     </div>
 
                     <button type="submit" class="btn" id="submit-btn" disabled>Absenden</button>
@@ -203,13 +207,16 @@
         // Kontaktformular (Google Apps Script)
         const contactForm = document.getElementById('contact-form');
         const contactStatus = document.getElementById('contact-status');
-        const googleScriptURL = 'https://script.google.com/macros/s/AKfycbw5Ig2qop2fpbcHJjI94NXTRMuOJgs-AbLz1dyPe9XgXGo02V6d_70bQenV8uELRIY87A/exec';
+        const googleScriptURL = 'https://script.google.com/macros/s/AKfycbyFNxm66Drfz_8jboUJxdAZ1PQSTHwnqKAr7z2N9i11PYoVpb0O_Qk0FNFU4nmGc_SfcQ/exec';
 
         contactForm.addEventListener('submit', e => {
             e.preventDefault();
             const btn = contactForm.querySelector('button[type="submit"]');
+            
+            // 1. Button sofort sperren und Status leeren
             btn.disabled = true;
             btn.textContent = 'Sende...';
+            contactStatus.textContent = ''; 
             
             fetch(googleScriptURL, { 
                 method: 'POST', 
@@ -218,16 +225,35 @@
             .then(res => res.json())
             .then(data => {
                 if (data.result === 'success') {
+                    // 2. ERFOLG: Nachricht zeigen und Formular leeren
                     contactStatus.textContent = 'Nachricht gesendet!';
                     contactStatus.style.color = '#C7CAB1';
                     contactForm.reset();
-                } else { throw new Error(); }
+                    
+                    // 3. COOLDOWN: Button für 60 Sekunden (60000 ms) sperren
+                    btn.textContent = 'Bitte 60s warten...';
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.textContent = 'Absenden';
+                    }, 60000);
+                    
+                } else { 
+                    // 4. BACKEND-FEHLER: (z.B. Rate Limit oder falsches Captcha)
+                    // Zeigt die echte Fehlermeldung aus dem Google Script an
+                    contactStatus.textContent = data.error || 'Fehler beim Senden.';
+                    contactStatus.style.color = 'red';
+                    
+                    // Button sofort wieder freigeben
+                    btn.disabled = false;
+                    btn.textContent = 'Absenden';
+                }
             })
             .catch(() => {
-                contactStatus.textContent = 'Fehler beim Senden.';
+                // 5. NETZWERK-FEHLER: (z.B. kein Internet)
+                contactStatus.textContent = 'Verbindungsfehler beim Senden.';
                 contactStatus.style.color = 'red';
-            })
-            .finally(() => {
+                
+                // Button sofort wieder freigeben
                 btn.disabled = false;
                 btn.textContent = 'Absenden';
             });
