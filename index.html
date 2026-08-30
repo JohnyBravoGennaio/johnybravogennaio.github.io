@@ -246,6 +246,9 @@
                     // Button sofort wieder freigeben
                     btn.disabled = false;
                     btn.textContent = 'Absenden';
+
+                    // CRITICAL: Reset Turnstile on backend error
+                    if (typeof turnstile !== 'undefined') turnstile.reset();
                 }
             })
             .catch(() => {
@@ -256,6 +259,9 @@
                 // Button sofort wieder freigeben
                 btn.disabled = false;
                 btn.textContent = 'Absenden';
+
+                // CRITICAL: Reset Turnstile on network error
+                if (typeof turnstile !== 'undefined') turnstile.reset();
             });
         });
         // Logik für die Bildvergrößerung
