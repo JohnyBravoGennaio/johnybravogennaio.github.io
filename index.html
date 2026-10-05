@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/lucid.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
@@ -400,15 +400,6 @@
             lucide.createIcons();
         }
     </script>
-    <script>
-    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === "init") { let api = function () { p(api, arguments); }; let namespace = ar[1]; api.q = api.q || []; typeof namespace === "string" ? (cal.ns[namespace] = api) : p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-    
-    Cal("init", {origin:"https://cal.com"});
-
-    // Design-Einstellungen (Farbe passend zu deiner Website)
-    Cal("ui", {"styles":{"branding":{"brandColor":"#C7CAB1"}},"hideEventTypeDetails":false,"layout":"month_view"});
-    </script>
-
     <div id="image-modal" class="image-modal" onclick="this.style.display='none'">
         <span class="close-modal">&times;</span>
         <img class="modal-content" id="full-image">
